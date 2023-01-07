@@ -14783,3 +14783,14 @@ td{
 #my-table tbody td:first-child{
     padding-top: 1.5px;
 }
+
+#my-table thead th{
+    position: sticky;
+    top: 0;
+    background-color: darkgray;
+    z-index: 999;
+}
+
+#my-table tr {
+    border-bottom: 2px solid black;
+}
