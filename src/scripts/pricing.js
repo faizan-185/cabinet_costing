@@ -390,7 +390,9 @@ function all_clear(){
         document.getElementById('open').disabled = false;
         document.getElementById('gross-amount').value = 0;
         document.getElementById('discount').value = 0;
+        document.getElementById('discount').readonly = true;
         document.getElementById('tax').value = 0;
+        document.getElementById('tax').readonly = true;
         document.getElementById('calculated-tax').value = 0;
         document.getElementById('net').value = 0;
         document.getElementById('is_quotation').checked = true
