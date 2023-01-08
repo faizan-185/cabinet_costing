@@ -145,11 +145,11 @@
                                 </div>
                                 <div class="account-dropdown__item">
                                     <a href="../screens/settings/password-change.html">
-                                        <i class="zmdi zmdi-settings"></i>Password Change</a>
+                                        <i class="zmdi zmdi-settings"></i>Update Login Password</a>
                                 </div>
                                 <div class="account-dropdown__item">
                                     <a href="../screens/settings/password1-change.html">
-                                        <i class="zmdi zmdi-key"></i>Update Password Change</a>
+                                        <i class="zmdi zmdi-key"></i>Update Primary Password</a>
                                 </div>
                                 <div class="account-dropdown__item">
                                     <a href="../screens/settings/price-change.html">
@@ -655,40 +655,39 @@
                                 </div>
                             </form>
                                 <div class="table-responsive table-responsive-data2" style="height: 250px; overflow: auto">
-                                    <table class="table table-data2" id="my-table" style="border: 2px solid black" >
-                                        <thead style="font-size: smaller; z-index: 999; border: 1px solid black">
-                                        <tr style="border-bottom: 2px solid black; background: darkgrey; color: black !important; text-align: center; z-index: 999">
+                                    <table class="table table-data2 pricing-tble" id="my-table" style="border: 2px solid black; border-collapse: separate; border-spacing: 0px" >
+                                        <thead>
+                                            <tr style="text-align: center; background-color: darkgrey">
+                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black;">
+                                                    <label class="au-checkbox">
+                                                        <input
+                                                                type="checkbox"
+                                                                id="checkbox-all"
+                                                                style="border: 1px solid green"
+                                                        />
+                                                        <span
+                                                                class="au-checkmark"
+                                                                id="checkbox-all-box"
+                                                                style="border: 1px solid green"
+                                                        ></span>
+                                                    </label>
+                                                    <p style="margin-left: 30px; margin-top: -8px">Select All</p>
 
-                                            <th class="p-1" style="width: 120px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">
-                                                <label class="au-checkbox">
-                                                    <input
-                                                            type="checkbox"
-                                                            id="checkbox-all"
-                                                            style="border: 1px solid green"
-                                                    />
-                                                    <span
-                                                            class="au-checkmark"
-                                                            id="checkbox-all-box"
-                                                            style="border: 1px solid green"
-                                                    ></span>
-                                                </label>
-                                                <p style="margin-left: 30px; margin-top: -8px">Select All</p>
-
-                                            </th>
-                                            <th class="p-1" style="width: 40px; color: black; border: 1px solid black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">No.</th>
-                                            <th class="p-1" style=" border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Utility</th>
-                                            <th class="p-1" style="border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Type</th>
-                                            <th class="p-1" style="width: 70px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Code</th>
-                                            <th class="p-1" style="width: 35px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Qty</th>
-                                            <th class="p-1" style="width: 120px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Door Panel</th>
-                                            <th class="p-1" style="width: 120px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Handles</th>
-                                            <th class="p-1" style="width: 120px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Hardware</th>
-                                            <th class="p-1" style="width: 120px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Adj. Shelves</th>
-                                            <th class="p-1" style="width: 100px; border: 1px solid black; color: black; position: sticky; top: 0;background-color: darkgrey; z-index: 999">Unit Price</th>
-                                            <th class="p-1" style="width: 100px; border: 1px solid black; color: black; position: sticky; top: 0; background-color: darkgrey; z-index: 999">Total</th>
-                                        </tr>
+                                                </th>
+                                                <th class="p-1" style="width: 40px; color: black; border: 1px solid black;">No.</th>
+                                                <th class="p-1" style=" border: 1px solid black; color: black;">Utility</th>
+                                                <th class="p-1" style="border: 1px solid black; color: black; ">Type</th>
+                                                <th class="p-1" style="width: 70px; border: 1px solid black; color: black;">Code</th>
+                                                <th class="p-1" style="width: 35px; border: 1px solid black; color: black;">Qty</th>
+                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black; ">Door Panel</th>
+                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black; ">Handles</th>
+                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black; ">Hardware</th>
+                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black;">Adj. Shelves</th>
+                                                <th class="p-1" style="width: 100px; border: 1px solid black; color: black; ">Unit Price</th>
+                                                <th class="p-1" style="width: 100px; border: 1px solid black; color: black;">Total</th>
+                                            </tr>
                                         </thead>
-                                        <tbody id="table-body-div" style="z-index: -1;" >
+                                        <tbody id="table-body-div" >
 
                                         </tbody>
                                     </table>

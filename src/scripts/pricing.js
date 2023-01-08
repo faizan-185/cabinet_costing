@@ -390,7 +390,9 @@ function all_clear(){
         document.getElementById('open').disabled = false;
         document.getElementById('gross-amount').value = 0;
         document.getElementById('discount').value = 0;
+        document.getElementById('discount').readonly = true;
         document.getElementById('tax').value = 0;
+        document.getElementById('tax').readonly = true;
         document.getElementById('calculated-tax').value = 0;
         document.getElementById('net').value = 0;
         document.getElementById('is_quotation').checked = true
@@ -790,24 +792,24 @@ function populate_table() {
       table.innerHTML += `<tr class="elevation-row-pricing"><td style=" font-size: large; text-align: center; padding: 0px; color: black; font-weight: bold; border-bottom: 1px solid black" colspan="12">${i}</td></tr>`;
       pricing[i].forEach((j, ind) => {
         table.innerHTML += `
-          <tr class="tr-shadow" style="border-bottom: 1px solid grey;">
-            <td class="p-1" style="width: 120px; border-right: 1px solid black">
+          <tr class="tr-shadow" style=" ">
+            <td class="p-1" style="width: 120px; border-right: 1px solid black; border-bottom: 1px solid black;">
               <label class="au-checkbox" style="margin-top: 2.5px"> 
                 <input type="checkbox" id="${i+'~'+j.item_id.toString()}" onchange="toggle(event);">
                 <span class="au-checkmark" style="border: 1px solid green; width: 20px; height: 20px"></span>
               </label>
             </td>
-            <td style="width: 40px; color: black; border-right: 1px solid black" class="p-1">${count}</td>
-            <td class="p-1 might-overflow" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.utility_text}</td>
-            <td class="p-1" style="width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; width: 150px; border-right: 1px solid black">${j.type_text}</td>
-            <td class="p-1" style="width: 70px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.code_text}</td>
-            <td class="p-1" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; width: 35px; border-right: 1px solid black">${j.qty}</td>
-            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.door_panel_text}</td>
-            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.handler_text}</td>
-            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.hardware_text}</td>
-            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${j.shelves_text}</td>
-            <td class="p-1" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black">${Intl.NumberFormat('en-US').format(j.unit)}</td>
-            <td class="p-1" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black;; ">${Intl.NumberFormat('en-US').format(j.total)}</td>
+            <td style="width: 40px; color: black; border-right: 1px solid black; border-bottom: 1px solid black;" class="p-1">${count}</td>
+            <td class="p-1 might-overflow" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.utility_text}</td>
+            <td class="p-1" style="width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; width: 150px; border-right: 1px solid black; border-bottom: 1px solid black;">${j.type_text}</td>
+            <td class="p-1" style="width: 70px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.code_text}</td>
+            <td class="p-1" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; width: 35px; border-right: 1px solid black; border-bottom: 1px solid black;">${j.qty}</td>
+            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.door_panel_text}</td>
+            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.handler_text}</td>
+            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.hardware_text}</td>
+            <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.shelves_text}</td>
+            <td class="p-1" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${Intl.NumberFormat('en-US').format(j.unit)}</td>
+            <td class="p-1" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-bottom: 1px solid black; ">${Intl.NumberFormat('en-US').format(j.total)}</td>
           </tr>`;
         document.getElementById('gross-amount').value = Math.round(document.getElementById('gross-amount').value) + Math.round(j.total);
         count +=1
@@ -819,6 +821,7 @@ function populate_table() {
 
 document.getElementById('form-pricing').addEventListener('submit', (event) => {
   event.preventDefault();
+  document.getElementById('open').disabled = true;
   item = {
     "item_id": items.length + 1,
     "elevation": document.getElementById('elevation-input').value,
@@ -841,6 +844,10 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "custom": document.getElementById('custom').value,
     "unit": parseInt(document.getElementById('unit').value),
     "total": parseInt(document.getElementById('total').innerHTML)
+  }
+  if(document.getElementById('is_shelve').value === 'no')
+  {
+    item.shelves_text = ''
   }
   if(check_list.length === 0)
   {
@@ -1265,7 +1272,11 @@ document.getElementById('confirm-1').addEventListener('click', (event) => {
                 });
               }
             })
-
+            if(document.getElementById('is_quotation').checked)
+            {
+              document.getElementById('discount').readonly = true;
+              document.getElementById('tax').readonly = true;
+            }
             populate_table();
           }
         })
