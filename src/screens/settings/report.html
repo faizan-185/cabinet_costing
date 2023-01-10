@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -10,10 +10,11 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Update Login Password</title>
+    <title>Create Report</title>
 
     <!-- Fontfaces CSS-->
     <link href="../../css/font-face.css" rel="stylesheet" media="all">
+    <link href="../../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="all">
     <!--    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">-->
     <link href="../../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 
@@ -47,7 +48,7 @@
         <div class="section__content section__content--p35">
             <div class="header3-wrap">
                 <div class="header__logo">
-                    <a href="../../index.html"><h3 class="text-white"><b>CABINET</b>costing</h3></a>
+                    <a href="../../index.html"><h3 class="text-white"><b>CABINET COSTING</b></h3></a>
                 </div>
                 <div class="header__navbar">
                     <ul class="list-unstyled">
@@ -142,19 +143,19 @@
                                         <i class="zmdi zmdi-account"></i>Firm Information</a>
                                 </div>
                                 <div class="account-dropdown__item">
-                                    <a href="../settings/password-change.html">
+                                    <a href="./password-change.html">
                                         <i class="zmdi zmdi-settings"></i>Update Login Password</a>
                                 </div>
                                 <div class="account-dropdown__item">
-                                    <a href="../settings/password1-change.html">
-                                        <i class="zmdi zmdi-settings"></i>Update Primary Password</a>
+                                    <a href="./password1-change.html">
+                                        <i class="zmdi zmdi-key"></i>Update Primary Password</a>
                                 </div>
                                 <div class="account-dropdown__item">
-                                    <a href="../settings/price-change.html">
+                                    <a href="./price-change.html">
                                         <i class="zmdi zmdi-money-box"></i>Price Update</a>
                                 </div>
                                 <div class="account-dropdown__item">
-                                    <a href="../settings/report.html">
+                                    <a href="./report.html">
                                         <i class="fas fa-file-pdf"></i>Create Report</a>
                                 </div>
                             </div>
@@ -351,74 +352,132 @@
 
         <!-- BREADCRUMB-->
         <section class="au-breadcrumb2">
-<!--            <div class="container">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12">-->
-<!--                        <div class="au-breadcrumb-content">-->
-<!--                            <div class="au-breadcrumb-left">-->
-<!--                                <span class="au-breadcrumb-span">You are here:</span>-->
-<!--                                <ul class="list-unstyled list-inline au-breadcrumb__list">-->
-<!--                                    <li class="list-inline-item active">-->
-<!--                                        <a href="#">Home</a>-->
-<!--                                    </li>-->
-<!--                                    <li class="list-inline-item seprate">-->
-<!--                                        <span>/</span>-->
-<!--                                    </li>-->
-<!--                                    <li class="list-inline-item">Settings</li>-->
-<!--                                    <li class="list-inline-item seprate">-->
-<!--                                        <span>/</span>-->
-<!--                                    </li>-->
-<!--                                    <li class="list-inline-item">Password Change</li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div style="padding-bottom: 10px; padding-left: 50px">-->
+            <!--                <div class="au-breadcrumb-content">-->
+            <!--                    <div class="au-breadcrumb-left">-->
+            <!--                        <span class="au-breadcrumb-span">You are here:</span>-->
+            <!--                        <ul class="list-unstyled list-inline au-breadcrumb__list">-->
+            <!--                            <li class="list-inline-item active">-->
+            <!--                                <a href="#">Home</a>-->
+            <!--                            </li>-->
+            <!--                            <li class="list-inline-item seprate">-->
+            <!--                                <span>/</span>-->
+            <!--                            </li>-->
+            <!--                            <li class="list-inline-item">Settings</li>-->
+            <!--                            <li class="list-inline-item seprate">-->
+            <!--                                <span>/</span>-->
+            <!--                            </li>-->
+            <!--                            <li class="list-inline-item">Price Change</li>-->
+            <!--                        </ul>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </section>
         <!-- END BREADCRUMB-->
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">
-
-                <div class="container-fluid" style="display: flex; justify-content: center">
-                    <div class="card" style="width: 500px; ">
-                        <div class="card-header">
-                            <strong>Update Login Password</strong>
+                <div class="container-fluid" style="display: flex; justify-content: center; ">
+                    <div class="card" style="width: 70%">
+                        <div class="card-header py-1">
+                            <strong>Create Report</strong>
                         </div>
-                        <div class="card-body card-block">
-                            <form onsubmit="" id="form" class="form-horizontal">
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="current-password" class=" form-control-label">Current Password</label>
+                        <div class="card-body py-1 ">
+                            <form id="form" class="form-horizontal">
+                                <div class="row">
+                                    <div class='col-lg-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker6'>
+                                                <input type='text' class="form-control" id="from" placeholder="From Date" required />
+                                                <span class="input-group-addon">
+                                                    <span class="fas fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="password" id="current-password" placeholder="Enter Current Password" class="form-control"  required>
+                                    <div class='col-lg-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker7'>
+                                                <input type='text' class="form-control" id="to" placeholder="To Date" required />
+                                                <span class="input-group-addon">
+                                                    <span class="fas fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="new-password" class=" form-control-label">New Password</label>
+                                    <div class="col-lg-3">
+                                        <div class="d-flex">
+                                            <select id="filter-pricing" class="form-control mb-1" style="width: 150px">
+                                                <option value="">___All___</option>
+                                                <option value="qou">Quotations</option>
+                                                <option value="inv">Invoices</option>
+                                            </select>
+                                            <span class="input-group-addon" style="height: 38px; width: 40px">
+                                                <span class="fas fa-filter pl-0"></span>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="password" id="new-password" placeholder="Enter New Password" class="form-control"  required>
+                                    <div>
+                                        <div>
+                                            <button id="create" class="btn btn-primary" type="submit" style="width: 82px">Create</button>
+                                            <button id="print" class="btn btn-warning d-none" onclick="event.preventDefault();" style="width: 82px">Print</button>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="d-flex justify-content-sm-around mt-2" style="border-top: 1px solid grey; padding-top: 10px">
-                                    <button type="submit" class="btn btn-primary" id="save">
-                                        Change Password
-                                    </button>
                                 </div>
                             </form>
+                            <div>
+                                <div class="table-responsive table-responsive-data2" style="height: 450px; overflow: auto">
+                                    <table class="table table-data2" id="my-table" style="border: 2px solid black; border-collapse: separate; border-spacing: 0px" >
+                                        <thead>
+                                        <tr style="text-align: center; background-color: darkgrey">
+                                            <th class="p-1" style="width: 40px; color: black; border: 1px solid black;">No.</th>
+                                            <th class="p-1" style="width: 70px; border: 1px solid black; color: black; ">Pricing No.</th>
+                                            <th class="p-1" style="width: 70px; border: 1px solid black; color: black;">Manual No.</th>
+                                            <th class="p-1" style="width: 170px; border: 1px solid black; color: black;">Client Name</th>
+                                            <th class="p-1" style="width: 90px; border: 1px solid black; color: black;">Type</th>
+                                            <th class="p-1" style="width: 80px; border: 1px solid black; color: black; ">Net Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="table-body-div" >
+                                            <tr><td colspan="6">No Data To Show ...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+        <button id="open-modal" class="d-none" data-toggle="modal" data-target="#staticModal"></button>
         <!-- END MAIN CONTENT-->
+        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticModalLabel">Enter Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('pass').value=''" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-10 mr-auto ml-auto">
+                                <input type="password" id="pass" placeholder="Password..." class="form-control"
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('pass').value = ''"
+                                id="cancel">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirm">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- END PAGE CONTAINER-->
     </div>
 
@@ -427,14 +486,18 @@
 <script>
   window.jQuery = window.$ = require('jquery');
 </script>
+<script src="../../js/moment.js"></script>
+
 <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="../../vendor/bootstrap-4.1/popper.min.js"></script>
 <!--    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>-->
 <!-- Vendor JS       -->
+<script src="../../js/bootstrap-datetimepicker.js"></script>
 <script src="../../vendor/slick/slick.min.js">
 </script>
 <script src="../../vendor/wow/wow.min.js"></script>
 <script src="../../vendor/animsition/animsition.min.js"></script>
+
 <script src="../../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
 </script>
 <script src="../../vendor/counter-up/jquery.waypoints.min.js"></script>
@@ -445,11 +508,13 @@
 <script src="../../vendor/chartjs/Chart.bundle.min.js"></script>
 <script src="../../vendor/select2/select2.min.js">
 </script>
+<script src="../../vendor/html2pdf.bundle.min.js"></script>
 <!--<script src="../vendor/datatable/datatable.min.js"></script>-->
-<script src="../../scripts/password_change.js"></script>
+<script src="../../scripts/report.js"></script>
 
 <!-- Main JS-->
 <script src="../../js/main.js"></script>
+
 </body>
 
 </html>
