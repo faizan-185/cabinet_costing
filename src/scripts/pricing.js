@@ -230,6 +230,8 @@ document.getElementById('edit').addEventListener('click', (event) => {
 
   document.getElementById('is_shelve').value = item.is_shelve;
   document.getElementById('custom').value = item.custom;
+  if(document.getElementById('custom').value === 'yes')
+    document.getElementById('unit').readOnly = false
   document.getElementById('unit').value = item.unit;
   document.getElementById('total').innerHTML = item.total;
 
@@ -302,6 +304,7 @@ function clear_dropdowns() {
   document.getElementById('custom').value = "no";
   document.getElementById('unit').value = "0";
   document.getElementById('total').innerHTML = "0";
+  document.getElementById('unit').readOnly = true;
   item = null;
   code_rate = 0;
   door = 0;
@@ -879,6 +882,7 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
   })
   document.getElementById('delete').disabled = true;
   document.getElementById('save').disabled = false;
+  document.getElementById('unit').readOnly = true;
   populate_table()
   clear_dropdowns()
   document.getElementById('edit').disabled = true;
@@ -1187,11 +1191,77 @@ document.getElementById('confirm').addEventListener('click', (event) => {
     document.getElementById('checkbox-all-open').checked = false
 })
 
+function toggle_open(event){
+  const val = event.target.id
+  if(event.target.checked)
+  {
+    file_manager.loadFile(path.join(__dirname, `../db/.pricings.json`))
+        .then(res => {
+          res.forEach(i => {
+            if(i["pinfo"].id.toString() === val){
+              check_list2.push(i)
+              document.getElementById('delete-1').disabled = false;
+              document.getElementById('confirm-1').disabled = false;
+            }
+          })
+          if(check_list2.length === res.length)
+          {
+            if(!document.getElementById('checkbox-all-open').checked)
+              document.getElementById('checkbox-all-open').checked = true
+          }
+          if(check_list2.length > 1)
+          {
+            document.getElementById('confirm-1').disabled = true;
+          }
+        })
+
+  }
+  else
+  {
+    file_manager.loadFile(path.join(__dirname, `../db/.pricings.json`))
+        .then(res => {
+          res.forEach(i => {
+            if(i["pinfo"].id.toString() === val){
+              const ind = check_list2.indexOf(i)
+              check_list2.splice(ind, 1)
+            }
+          })
+          if(check_list2.length === 0)
+          {
+            document.getElementById('confirm-1').disabled = true;
+            document.getElementById('delete-1').disabled = true;
+            if(document.getElementById('checkbox-all-open').checked)
+              document.getElementById('checkbox-all-open').checked = false
+          }
+          if(check_list2.length === 1)
+          {
+            document.getElementById('confirm-1').disabled = false;
+            document.getElementById('delete-1').disabled = false;
+            if(document.getElementById('checkbox-all-open').checked)
+              document.getElementById('checkbox-all-open').checked = false
+          }
+          if(check_list2.length > 1)
+          {
+            document.getElementById('confirm-1').disabled = true;
+            document.getElementById('delete-1').disabled = false;
+          }
+          if(check_list2.length !== res.length)
+          {
+            if(document.getElementById('checkbox-all-open').checked)
+              document.getElementById('checkbox-all-open').checked = false
+          }
+
+
+        })
+  }
+}
+
 document.getElementById('open').addEventListener('click', (event) => {
-  document.getElementById('checkbox-all-open').checked = false;
-  document.getElementById('confirm-1').disabled = true;
   file_manager.loadFile(path.join(__dirname, '../db/.pricings.json'))
       .then(res => {
+        check_list2 = []
+        document.getElementById('checkbox-all-open').checked = false;
+        document.getElementById('confirm-1').disabled = true;
         const tb = document.getElementById('load-pricing-table');
         tb.innerHTML = "";
         res.forEach((i, ind) => {
@@ -1242,7 +1312,7 @@ document.getElementById('confirm-1').addEventListener('click', (event) => {
             document.getElementById('product-input').value = i["pinfo"].product_type;
             document.getElementById('sales-input').value = i["pinfo"].sales_rp;
             document.getElementById('carcass-input').value = i["pinfo"].carcass;
-              document.getElementById('is_quotation').checked = i["pinfo"].is_quotation;
+            document.getElementById('is_quotation').checked = i["pinfo"].is_quotation;
             document.getElementById('gross-amount').value = i["pinfo"].gross_amount;
             document.getElementById('discount').value = i["pinfo"].discount;
             document.getElementById('tax').value = i["pinfo"].tax;
@@ -1295,6 +1365,16 @@ document.getElementById('is_quotation').addEventListener('change', (event) => {
     document.getElementById('discount').disabled = false;
   }
 })
+
+function close_modal(event)
+{
+  event.preventDefault();
+  document.getElementById('del-pass').value = '';
+  // document.getElementById('load-pricing-table').innerHTML = ''
+  // document.getElementById('checkbox-all-open').checked = false;
+  // document.getElementById('confirm-1').disabled = true;
+  console.log('close')
+}
 
 document.getElementById('print').addEventListener('click', async function (event)  {
   let element = document.getElementById('my-table');
@@ -1425,7 +1505,7 @@ document.getElementById('print').addEventListener('click', async function (event
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">TYPE</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">CODE</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">QTY</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">DOOR PANEL</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">FINISHING</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">HANDLES</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">HARDWARE</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">ADJ. SHELVES</th>
@@ -1596,70 +1676,7 @@ function delete_pricing()
   all_clear();
 }
 
-function toggle_open(event){
-  const val = event.target.id
-  if(event.target.checked)
-  {
-    file_manager.loadFile(path.join(__dirname, `../db/.pricings.json`))
-        .then(res => {
-          res.forEach(i => {
-            if(i["pinfo"].id.toString() === val){
-              check_list2.push(i)
-              document.getElementById('delete-1').disabled = false;
-              document.getElementById('confirm-1').disabled = false;
-            }
-          })
-          if(check_list2.length === res.length)
-          {
-            if(!document.getElementById('checkbox-all-open').checked)
-              document.getElementById('checkbox-all-open').checked = true
-          }
-          if(check_list2.length > 1)
-          {
-            document.getElementById('confirm-1').disabled = true;
-          }
-        })
 
-  }
-  else
-  {
-    file_manager.loadFile(path.join(__dirname, `../db/.pricings.json`))
-        .then(res => {
-          res.forEach(i => {
-            if(i["pinfo"].id.toString() === val){
-              const ind = check_list2.indexOf(i)
-              check_list2.splice(ind, 1)
-            }
-          })
-          if(check_list2.length === 0)
-          {
-            document.getElementById('confirm-1').disabled = true;
-            document.getElementById('delete-1').disabled = true;
-            if(document.getElementById('checkbox-all-open').checked)
-            document.getElementById('checkbox-all-open').checked = false
-          }
-          if(check_list2.length === 1)
-          {
-            document.getElementById('confirm-1').disabled = false;
-            document.getElementById('delete-1').disabled = false;
-            if(document.getElementById('checkbox-all-open').checked)
-              document.getElementById('checkbox-all-open').checked = false
-          }
-          if(check_list2.length > 1)
-          {
-            document.getElementById('confirm-1').disabled = true;
-            document.getElementById('delete-1').disabled = false;
-          }
-          if(check_list2.length !== res.length)
-          {
-            if(document.getElementById('checkbox-all-open').checked)
-              document.getElementById('checkbox-all-open').checked = false
-          }
-
-
-        })
-  }
-}
 
 document.getElementById('checkbox-all-open').addEventListener('change', (event) => {
   if(event.target.checked)
@@ -1865,7 +1882,7 @@ document.getElementById('print').addEventListener('click', async function (event
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">TYPE</th>
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">CODE</th>
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">QTY</th>
-                                                <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">DOOR PANEL</th>
+                                                <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">Finishing</th>
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">HANDLES</th>
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">HARDWARE</th>
                                                 <th style="font-weight: calc(500); font-size: 10px; text-align: center; border: 0.5px solid black">ADJ. SHELVES</th>

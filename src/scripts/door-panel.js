@@ -18,7 +18,7 @@ function clearFields() {
   document.getElementById("select").value = "";
   document.getElementById("select-1").value = "";
   document.getElementById("select-2").value = "";
-  document.getElementById("rate").value = "";
+  document.getElementById("rate").value = "0";
   file_manager
     .loadFile(path.join(__dirname, "../../db/.doors.json"))
     .then((res) => {
@@ -330,11 +330,7 @@ function populateTable() {
       if (data1.length === 0) {
         document.getElementById("client-table").innerHTML = `
           <tr class="tr-shadow" style="border-bottom: 2px solid grey">
-            <td style="border: 1px solid black">No Door Panels Added.</td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
+            <td style="border: 1px solid black" colspan="5">No Data Added.</td>
           </tr>`;
         document.getElementById("checkbox-all-box").style.display = "none";
       } else {

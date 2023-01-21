@@ -108,7 +108,7 @@
                                 <li>
                                     <div class="account-dropdown__item">
                                         <a href="../screens/tools/door-panel.html">
-                                            <i class="fas fa-columns"></i>Door Panel</a>
+                                            <i class="fas fa-columns"></i>Finishing</a>
                                     </div>
                                 </li>
                                 <li>
@@ -269,7 +269,7 @@
                             <li>
                                 <div class="account-dropdown__item">
                                     <a href="../screens/tools/door-panel.html">
-                                        <i class="fas fa-columns"></i>Door Panel</a>
+                                        <i class="fas fa-columns"></i>Finishing</a>
                                 </div>
                             </li>
                             <li>
@@ -575,7 +575,7 @@
                                         </label>
                                         <div class="input-group">
                                             <input placeholder="Select" required onkeypress="save_dropdown(event, 'elevations', 'elevation-input')" onkeydown="update_dropdown_del(event, 'elevations', 'elevation-input')"
-                                                   class="form-control p-1" list="elevations" id="elevation-input" style="font-weight: normal; font-size: small; width: 150px; color: black"/>
+                                                   class="form-control p-1" list="elevations" id="elevation-input" style="font-weight: normal; font-size: small; width: 115px; color: black"/>
                                         </div>
                                         <datalist id="elevations" >
 
@@ -589,7 +589,7 @@
                                     </div>
                                     <div class="form-group px-1">
                                         <label for="type" class="form-control-label">Type</label>
-                                        <select name="carcass" id="type" required class="form-control p-0" onchange="type_change(event)" style="font-size: small; width: 110px; color: black">
+                                        <select name="carcass" id="type" required class="form-control p-0" onchange="type_change(event)" style="font-size: small; width: 150px; color: black">
 
                                         </select>
                                     </div>
@@ -606,7 +606,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group px-1">
-                                        <label for="door-panel" class="form-control-label ">Door Panel</label>
+                                        <label for="door-panel" class="form-control-label ">Finishing</label>
                                         <select name="carcass"  id="door-panel" class="form-control p-0" style="font-size: small; width: 120px; color: black">
 
                                         </select>
@@ -643,6 +643,13 @@
                                             <option value="yes">YES</option>
                                         </select>
                                     </div>
+                                    <style>
+                                        input[type=number]::-webkit-inner-spin-button,
+                                        input[type=number]::-webkit-outer-spin-button {
+                                            -webkit-appearance: none;
+                                            margin: 0;
+                                        }
+                                    </style>
                                     <div class="form-group px-1" style="display: flex; flex-direction: column">
                                         <label for="unit" class="form-control-label ">Unit Price</label>
                                         <input type="number" id="unit" class="form-control" readonly style="padding: 0px; width: 70px; font-size: 11.6px; height: 33.5px; padding-left: 10px; text-align: center" min="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" />
@@ -683,7 +690,7 @@
                                                 <th class="p-1" style="width: 150px; border: 1px solid black; color: black; ">Type</th>
                                                 <th class="p-1" style="width: 70px; border: 1px solid black; color: black;">Code</th>
                                                 <th class="p-1" style="width: 35px; border: 1px solid black; color: black;">Qty</th>
-                                                <th class="p-1" style="width: 140px; border: 1px solid black; color: black; ">Door Panel</th>
+                                                <th class="p-1" style="width: 140px; border: 1px solid black; color: black; ">Finishing</th>
                                                 <th class="p-1" style="width: 100px; border: 1px solid black; color: black; ">Handles</th>
                                                 <th class="p-1" style="width: 120px; border: 1px solid black; color: black; ">Hardware</th>
                                                 <th class="p-1" style="width: 105px; border: 1px solid black; color: black;">Adj. Shelves</th>
@@ -792,7 +799,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticModalLabel-1">Choose a Pricing</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" onclick="close_modal(event)">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body" style="max-height: 300px; overflow-y: auto;">
@@ -835,7 +842,7 @@
                             <button type="submit" class="btn btn-danger"
                                     id="delete-1" disabled>Delete</button>
                         </form>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.getElementById('del-pass').value = ''"
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="close_modal(event)"
                                 id="cancel-1">Close</button>
                         <button type="button" class="btn btn-primary" id="confirm-1" disabled>Open</button>
                     </div>

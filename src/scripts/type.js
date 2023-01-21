@@ -196,9 +196,7 @@ function populateTable() {
       if (data1.length === 0) {
         document.getElementById("client-table").innerHTML += `
           <tr class="tr-shadow" style="border-bottom: 2px solid grey">
-            <td style="border: 1px solid black">No Types Added.</td>
-            <td style="border: 1px solid black"></td>
-            <td style="border: 1px solid black"></td>
+            <td style="border: 1px solid black" colspan="3">No Data Added.</td>
           </tr>`;
         document.getElementById("checkbox-all-box").style.display = "none";
       } else {
