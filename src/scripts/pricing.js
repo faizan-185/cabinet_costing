@@ -3,9 +3,6 @@ const remote = require('electron').remote
 // const PDFDocument = require('pdf-creator-node');
 const fs = require("fs");
 const path = require('path')
-const {parse} = require("@fortawesome/fontawesome");
-const async = require("async");
-const main = remote.require(path.join(__dirname, '../../index.js'))
 const file_manager = remote.require(path.join(__dirname, '../scripts/file_manager.js'))
 
 let pricing = {}
@@ -390,9 +387,9 @@ function all_clear(){
         document.getElementById('open').disabled = false;
         document.getElementById('gross-amount').value = 0;
         document.getElementById('discount').value = 0;
-        document.getElementById('discount').readonly = true;
+        document.getElementById('discount').disabled = true;
         document.getElementById('tax').value = 0;
-        document.getElementById('tax').readonly = true;
+        document.getElementById('tax').disabled = true;
         document.getElementById('calculated-tax').value = 0;
         document.getElementById('net').value = 0;
         document.getElementById('is_quotation').checked = true
@@ -833,11 +830,11 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "code_text": document.getElementById('code').options[document.getElementById('code').selectedIndex].text,
     "qty": document.getElementById('qty').value,
     "door_panel": document.getElementById('door-panel').value,
-    "door_panel_text": document.getElementById('door-panel').options[document.getElementById('door-panel').selectedIndex].text,
+    "door_panel_text": document.getElementById('door-panel').options[document.getElementById('door-panel').selectedIndex].text === "Select" ? "" : document.getElementById('door-panel').options[document.getElementById('door-panel').selectedIndex].text,
     "handler": document.getElementById('handler').value,
-    "handler_text": document.getElementById('handler').options[document.getElementById('handler').selectedIndex].text,
+    "handler_text": document.getElementById('handler').options[document.getElementById('handler').selectedIndex].text === "Select" ? "" : document.getElementById('handler').options[document.getElementById('handler').selectedIndex].text,
     "hardware": document.getElementById('hardware').value,
-    "hardware_text": document.getElementById('hardware').options[document.getElementById('hardware').selectedIndex].text,
+    "hardware_text": document.getElementById('hardware').options[document.getElementById('hardware').selectedIndex].text === "Select" ? "" : document.getElementById('hardware').options[document.getElementById('hardware').selectedIndex].text,
     "shelves": document.getElementById('shelves').value,
     "shelves_text": document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text === "Select" ? "" : document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text,
     "is_shelve": document.getElementById('is_shelve').value,
@@ -1082,7 +1079,7 @@ document.getElementById('confirm').addEventListener('click', (event) => {
                 // })
                 if(pricing["pinfo"] && pricing["pinfo"].manual_no === document.getElementById('manual-input').value)
                 {
-                  r = confirm("Want to save with same manual number?")
+                  r = confirm("Want to save with same Reference number?")
                   if (r)
                   {
                     old_pricing.forEach((l, ind) => {
@@ -1274,8 +1271,12 @@ document.getElementById('confirm-1').addEventListener('click', (event) => {
             })
             if(document.getElementById('is_quotation').checked)
             {
-              document.getElementById('discount').readonly = true;
-              document.getElementById('tax').readonly = true;
+              document.getElementById('discount').disabled = true;
+              document.getElementById('tax').disabled = true;
+            }
+            else {
+              document.getElementById('discount').disabled = false;
+              document.getElementById('tax').disabled = false;
             }
             populate_table();
           }
@@ -1297,40 +1298,43 @@ document.getElementById('is_quotation').addEventListener('change', (event) => {
 
 document.getElementById('print').addEventListener('click', async function (event)  {
   let element = document.getElementById('my-table');
-  var opt = {
-    margin:       0.5,
-    filename:     'invoice.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
-  };
-  file_manager.loadFile(path.join(__dirname, '../db/.firm.json'))
-      .then(res => {
-        // const header = element.rows[0]
-        // for (var i = 0; i < element.rows[0].cells.length; i++) {
-        //
-        //   // Getting the text of columnName
-        //   var str = element.rows[0].cells[i].innerHTML;
-        //
-        //   // If 'Geek_id' matches with the columnName 
-        //   if (str.search("All") != -1) {
-        //     for (var j = 0; j < element.rows.length; j++) {
-        //       if(element.rows[j].classList[0] !== "elevation-row-pricing")
-        //         element.rows[j].deleteCell(i);
-        //     }
-        //   }
-        // }
-        file_manager.loadFile(path.join(__dirname, '../db/.clients.json'))
-            .then(ress => {
-              ress.forEach(k => {
-                let qout = ""
-                let total = ""
-                let name = ""
-                let days_notice = ``
-                if(document.getElementById('is_quotation').checked)
-                {
-                  days_notice = `<div style="position: absolute; right: 0;"><p style="color: red; font-size: 9px;"><b>Notice: </b>This Quotation is valid for 15 days only.</p></div>`
-                  qout = `
+  const r = confirm("PDF report generated successfully!")
+  if (r)
+  {
+    var opt = {
+      margin:       0.5,
+      filename:     'invoice.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 5 },
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+    file_manager.loadFile(path.join(__dirname, '../db/.firm.json'))
+        .then(res => {
+          // const header = element.rows[0]
+          // for (var i = 0; i < element.rows[0].cells.length; i++) {
+          //
+          //   // Getting the text of columnName
+          //   var str = element.rows[0].cells[i].innerHTML;
+          //
+          //   // If 'Geek_id' matches with the columnName 
+          //   if (str.search("All") != -1) {
+          //     for (var j = 0; j < element.rows.length; j++) {
+          //       if(element.rows[j].classList[0] !== "elevation-row-pricing")
+          //         element.rows[j].deleteCell(i);
+          //     }
+          //   }
+          // }
+          file_manager.loadFile(path.join(__dirname, '../db/.clients.json'))
+              .then(ress => {
+                ress.forEach(k => {
+                  let qout = ""
+                  let total = ""
+                  let name = ""
+                  let days_notice = ``
+                  if(document.getElementById('is_quotation').checked)
+                  {
+                    days_notice = `<div style="position: absolute; right: 0;"><p style="color: red; font-size: 9px;"><b>Notice: </b>This Quotation is valid for 15 days only.</p></div>`
+                    qout = `
                           <div style="display: flex; flex-direction: row; justify-content: space-between">
                                 <h3 style="color: black">${res[0].name}</h3>
                                 <div style="background-color: black; height: 30px; width: 100px; text-align: center; align-items: center; position: absolute; right: 0; border-radius: 20px">
@@ -1338,7 +1342,7 @@ document.getElementById('print').addEventListener('click', async function (event
                                 </div>
                             </div>
                         `
-                  total = `
+                    total = `
                            
                           <div style="display: flex; flex-direction: column; text-align: right">
                                 <p style="color: black; font-size: 10px"><b>Total:</b></p>
@@ -1348,126 +1352,126 @@ document.getElementById('print').addEventListener('click', async function (event
                                 
                             </div>
                         `;
-                  name = " Quotation.pdf"
-                }
-                else
-                {
-                  qout = `<h3 style="color: black">${res[0].name}</h3>`
-                  total = `
+                    name = " Quotation.pdf"
+                  }
+                  else
+                  {
+                    qout = `<h3 style="color: black">${res[0].name}</h3>`
+                    total = `
                               <div style="display: flex; flex-direction: column; text-align: right; ">
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Total:</b></p>
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Discount:</b></p>
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Taxes:</b></p>
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Net Value:</b></p>
+                                <p style="color: black; font-size: 10px;"><b>Total:</b></p>
+                                <p style="color: black; font-size: 10px;"><b>Discount:</b></p>
+                                <p style="color: black; font-size: 10px;"><b>Taxes:</b></p>
+                                <p style="color: black; font-size: 10px;"><b>Net Value:</b></p>
                             </div>
                             <div style="display: flex; flex-direction: column; width: 60px; text-align: left; margin-left: 10px">
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif">${Intl.NumberFormat('en-US').format(document.getElementById('gross-amount').value)}</p>
-                                <p style="color: black; font-size: 10px;font-family: 'Arial Narrow', Arial, sans-serif">${Intl.NumberFormat('en-US').format(document.getElementById('discount').value)}</p>
-                                <p style="color: black; font-size: 10px; border-bottom: 1px solid black;font-family: 'Arial Narrow', Arial, sans-serif">${Intl.NumberFormat('en-US').format(document.getElementById('calculated-tax').value)}</p>
-                                <p style="color: black; font-size: 10px; border-bottom: 1px black double;font-family: 'Arial Narrow', Arial, sans-serif"><b>${Intl.NumberFormat('en-US').format(document.getElementById('net').value)}</b></p>
+                                <p style="color: black; font-size: 10px; font-weight: 500">${Intl.NumberFormat('en-US').format(document.getElementById('gross-amount').value)}</p>
+                                <p style="color: black; font-size: 10px;font-weight: 500">${Intl.NumberFormat('en-US').format(document.getElementById('discount').value)}</p>
+                                <p style="color: black; font-size: 10px;font-weight: 500; border-bottom: 1px solid black;">${Intl.NumberFormat('en-US').format(document.getElementById('calculated-tax').value)}</p>
+                                <p style="color: black; font-size: 10px; border-bottom: 1px black double;"><b>${Intl.NumberFormat('en-US').format(document.getElementById('net').value)}</b></p>
                             </div>
                           `;
-                  name = " Invoice.pdf"
-                }
-                if(k.id === document.getElementById('client-input').value)
-                {
-                  file_manager.loadFile(path.join(__dirname, '../db/terms.json'))
-                      .then(obj => {
-                        let terms = ``;
-                        for (const key in obj) {
-                          terms += `
+                    name = " Invoice.pdf"
+                  }
+                  if(k.id === document.getElementById('client-input').value)
+                  {
+                    file_manager.loadFile(path.join(__dirname, '../db/terms.json'))
+                        .then(obj => {
+                          let terms = ``;
+                          for (const key in obj) {
+                            terms += `
                             <p style="color: black; font-size: 10px"><b>${key}</b></p>
                           `
-                          obj[key].forEach(term => {
-                            terms += `
+                            obj[key].forEach(term => {
+                              terms += `
                               <ul>
                                 <li style="font-size: 8px; color: black">&#8226; ${term}</li>
                               </ul>
                             `
-                          })
-                        }
-                        let body = ``
-                        const keys = Object.keys(pricing)
-                        let count = 1
-                        keys.forEach(i => {
-                          if(pricing[i].length>0 && i !== "pinfo")
-                          {
-                            body += `<tr><td style="font-size: 12px; text-align: center; padding: 0px; color: black; font-weight: bold;font-family: 'Arial Narrow', Arial, sans-serif" colspan="12">${i}</td></tr>`;
-                            pricing[i].forEach((j, ind) => {
-                              body += `
-                                <tr style="padding-top: 3px; padding-bottom: 3px">
-                                  <td style="text-align: center;width: 40px; color: black; font-size: 9px; padding-left: 3px; padding-top: 2.5px; padding-bottom: 2.5px; font-family: 'Arial Narrow', Arial, sans-serif" >${count}</td>
-                                  <td style="text-align: center;padding-left: 3px; width: 170px; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; overflow: hidden; color: black; font-family: 'Arial Narrow', Arial, sans-serif">${j.utility_text}</td>
-                                  <td  style="text-align: center; padding-left: 3px;width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px;font-family: 'Arial Narrow', Arial, sans-serif">${j.type_text}</td>
-                                  <td  style="text-align: center; padding-left: 3px;width: 70px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black; font-family: 'Arial Narrow', Arial, sans-serif">${j.code_text}</td>
-                                  <td  style="text-align: center; padding-left: 3px;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px; width: 35px; font-family: 'Arial Narrow', Arial, sans-serif">${j.qty}</td>
-                                  <td  style="text-align: center;padding-left: 3px;width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black; font-family: 'Arial Narrow', Arial, sans-serif">${j.door_panel_text}</td>
-                                  <td  style="text-align: center;width: 80px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;font-family: 'Arial Narrow', Arial, sans-serif">${j.handler_text}</td>
-                                  <td  style="text-align: center;width: 140px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;font-family: 'Arial Narrow', Arial, sans-serif">${j.hardware_text}</td>
-                                  <td  style="text-align: center;width: 110px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;font-family: 'Arial Narrow', Arial, sans-serif">${j.shelves_text}</td>
-                                  <td  style="text-align: center;width: 95px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;font-family: 'Arial Narrow', Arial, sans-serif">${Intl.NumberFormat('en-US').format(j.unit)}</td>
-                                  <td style="text-align: right; padding-right: 3px;width: 100px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px; font-family: 'Arial Narrow', Arial, sans-serif">${Intl.NumberFormat('en-US').format(j.total)}</td>
-                                </tr>`;
-                              count +=1
-                            });
+                            })
                           }
-                        })
-                        let table = `
+                          let body = ``
+                          const keys = Object.keys(pricing)
+                          let count = 1
+                          keys.forEach(i => {
+                            if(pricing[i].length>0 && i !== "pinfo")
+                            {
+                              body += `<tr><td style="font-size: 11px; text-align: center; padding: 0px; color: black; font-weight: bold;" colspan="12">${i}</td></tr>`;
+                              pricing[i].forEach((j, ind) => {
+                                body += `
+                                <tr style="padding-top: 3px; padding-bottom: 3px; font-weight: 500">
+                                  <td style="text-align: center;width: 40px; color: black; font-size: 9px; padding-left: 3px; padding-top: 2.5px; padding-bottom: 2.5px;" >${count}</td>
+                                  <td style="text-align: center;padding-left: 3px; width: 170px; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; overflow: hidden; color: black; ">${j.utility_text}</td>
+                                  <td  style="text-align: center; padding-left: 3px;width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px;">${j.type_text}</td>
+                                  <td  style="text-align: center; padding-left: 3px;width: 70px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black; ">${j.code_text}</td>
+                                  <td  style="text-align: center; padding-left: 3px;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px; width: 35px; ">${j.qty}</td>
+                                  <td  style="text-align: center;padding-left: 3px;width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black; ">${j.door_panel_text}</td>
+                                  <td  style="text-align: center;width: 80px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;">${j.handler_text}</td>
+                                  <td  style="text-align: center;width: 140px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;">${j.hardware_text}</td>
+                                  <td  style="text-align: center;width: 110px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;">${j.shelves_text}</td>
+                                  <td  style="text-align: center;width: 95px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 9px; color: black;">${Intl.NumberFormat('en-US').format(j.unit)}</td>
+                                  <td style="text-align: right; padding-right: 3px;width: 100px; padding-left: 3px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; font-size: 9px;">${Intl.NumberFormat('en-US').format(j.total)}</td>
+                                </tr>`;
+                                count +=1
+                              });
+                            }
+                          })
+                          let table = `
                                     <table style="font-size: 12px; color: black;">
                                         <thead style="background-color: #C0C0C0; padding-top: 2px; padding-bottom: 2px">
                                             <tr style="padding-top: 2.5px; padding-bottom: 2.5px; ">
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2.5px; padding-bottom: 2.5px; font-family: 'Arial Narrow', Arial, sans-serif">No.</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2px; padding-bottom: 2px; font-family: 'Arial Narrow', Arial, sans-serif">UTILITY</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; font-family: 'Arial Narrow', Arial, sans-serif">TYPE</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">CODE</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">QTY</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">DOOR PANEL</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">HANDLES</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">HARDWARE</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">ADJ. SHELVES</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">UNIT PRICE</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;font-family: 'Arial Narrow', Arial, sans-serif">TOTAL</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2.5px; padding-bottom: 2.5px;">No.</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2px; padding-bottom: 2px;">UTILITY</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">TYPE</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">CODE</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">QTY</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">DOOR PANEL</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">HANDLES</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">HARDWARE</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">ADJ. SHELVES</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">UNIT PRICE</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">TOTAL</th>
                                             </tr>
                                         </thead>
                                         <tbody style="border: 0.5px solid black">${body}</tbody>
                                     </table>
                                     `
 
-                        let html = `
+                          let html = `
                    <div style="display: flex; flex-direction: row; margin-bottom: 5px">
                         <img alt="img" src="${res[0].logo}" style="height: 100px; width: 80px; margin-right: 10px" />
                         <div style="display: flex; flex-direction: column;">
                             ${qout}
                             <div style="display: flex; flex-direction: row; justify-content: space-between">
-                                <p style="color: black; font-size: 12px;font-family: 'Arial Narrow', Arial, sans-serif">${res[0].address}, Ph # ${res[0].contact}</p>
-                                <p style="color: black; font-size: 13px; position: absolute; right: 0; font-family: 'Arial Narrow', Arial, sans-serif">Date: ${document.getElementById('entry-date').valueAsDate.getDay()}-${document.getElementById('entry-date').valueAsDate.getMonth()}-${document.getElementById('entry-date').valueAsDate.getFullYear()}</p>
+                                <p style="color: black; font-size: 12px;">${res[0].address}, Ph # ${res[0].contact}</p>
+                                <p style="color: black; font-size: 13px; position: absolute; right: 0;">Date: ${document.getElementById('entry-date').valueAsDate.getDate()}-${document.getElementById('entry-date').valueAsDate.getMonth()+1}-${document.getElementById('entry-date').valueAsDate.getFullYear()}</p>
                             </div>
                            
                             <div style="width: 100%; border-bottom: 2px solid grey; padding-bottom: 10px; margin-bottom: 10px"></div>
-                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px">
-                                <p style="color: black; width: 200px; font-size: 11px; font-family: 'Arial Narrow', Arial, sans-serif "><b>Client Name: </b>${k.name}</p>
-                                <p style="color: black; width: 170px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Contact: </b> ${k.contact}</p>
-                                <p style="color: black; width: 230px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Address: </b> ${k.address}</p>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px; font-weight: 500">
+                                <p style="color: black; width: 200px; font-size: 11px; "><b>Client Name: &nbsp;</b>${k.name}</p>
+                                <p style="color: black; width: 170px; font-size: 11px;"><b>Contact: &nbsp;</b> ${k.contact}</p>
+                                <p style="color: black; width: 230px; font-size: 11px;"><b>Address: &nbsp;</b> ${k.address}</p>
                             </div>
-                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px">
-                                <p style="color: black; width: 200px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Pricing No: </b>${document.getElementById('pricing-no').value}</p>
-                                <p style="color: black; width: 170px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Manual No. </b>${document.getElementById('manual-input').value}</p>
-                                <p style="color: black; font-size: 11px; width: 230px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Delivery Time: </b>${document.getElementById('delivery-days').value} working days</p>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px; font-weight: 500">
+                                <p style="color: black; width: 200px; font-size: 11px;"><b>Pricing No: &nbsp;</b>${document.getElementById('pricing-no').value}</p>
+                                <p style="color: black; width: 170px; font-size: 11px;"><b>Reference No. &nbsp;</b>${document.getElementById('manual-input').value}</p>
+                                <p style="color: black; font-size: 11px; width: 230px;"><b>Delivery Time: &nbsp;</b>${document.getElementById('delivery-days').value} working days</p>
                                 
                             </div>
-                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px">
-                                <p style="color: black; width: 200px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Product Type: </b>${document.getElementById('product-input').value}</p>
-                                <p style="color: black; width: 170px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Carcass: </b> ${document.getElementById('carcass-input').value}</p>
-                                <p style="color: black; width: 230px; font-size: 11px;font-family: 'Arial Narrow', Arial, sans-serif"><b>Sales RP: </b>${document.getElementById('sales-input').value}</p>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px; font-weight: 500">
+                                <p style="color: black; width: 200px; font-size: 11px;"><b>Product Type: &nbsp;</b>${document.getElementById('product-input').value}</p>
+                                <p style="color: black; width: 170px; font-size: 11px;"><b>Carcass: &nbsp;</b> ${document.getElementById('carcass-input').value}</p>
+                                <p style="color: black; width: 230px; font-size: 11px;"><b>Sales RP: &nbsp;</b>${document.getElementById('sales-input').value}</p>
                             </div>
                         </div>
                     </div>
                     ${table}
                     ${days_notice}
                     <div style="display: flex; flex-direction: row; justify-content: space-between">
-                        <div style="display: flex; flex-direction: row; justify-content: space-between; padding-top: 60px; width: 480px;">
-                            <p style="color: black; font-size: 10px; width: 200px; font-family: 'Arial Narrow', Arial, sans-serif;"><b>Authorized By: ------------------------------</b></p>
-                            <p style="color: black; font-size: 10px; width: 250px; margin-left: 30px; font-family: 'Arial Narrow', Arial, sans-serif;"><b>Customer Signature: ------------------------------</b></p>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; padding-top: 60px; width: 470px;">
+                            <p style="color: black; font-size: 10px; width: 250px;"><b>Authorized By: -----------------------</b></p>
+                            <p style="color: black; font-size: 10px; width: 300px; margin-left: 10px; "><b>Customer Signature: -----------------------</b></p>
                         </div>
                           <div style="display: flex; flex-direction: row; width: 155px; margin-left: 95px; margin-top: 15px">
                               ${total}
@@ -1478,17 +1482,19 @@ document.getElementById('print').addEventListener('click', async function (event
                     <p style="color: red; font-size: 8px"><b>Please Note:</b></p>
                     <p style="color: red; font-size: 8px">Any electrical / plumbing and gas connections for Hob, Hood, Oven & Sink is excluded from our scope of work. To avoid any possible damage to plumbing pipes / electrical wiring, we request you to mark such areas with dotted lines failing which; we accept no responsibility for any such incident, occurred while drilling holes for fixing the cabinets.</p>         
                     <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 60px">
-                            <p style="color: black; font-size: 10px;  font-family: 'Arial Narrow', Arial, sans-serif"><b>Authorized By: ------------------------------</b></p>
-                            <p style="color: black; font-size: 10px; margin-left: 30px; font-family: 'Arial Narrow', Arial, sans-serif"><b>Customer Signature: ------------------------------</b></p>
+                            <p style="color: black; font-size: 10px; "><b>Authorized By: ------------------------------</b></p>
+                            <p style="color: black; font-size: 10px; margin-left: 30px;"><b>Customer Signature: ------------------------------</b></p>
                     </div>
                     `
-                        html2pdf().set(opt).from(html).to('pdf').save(`${k.name}'s${name}`);
-                        alert("PDF Report is generated successfully!")
-                      })
-                }
+                          html2pdf().set(opt).from(html).to('pdf').save(`${k.name}'s${name}`);
+
+                        })
+                  }
+                })
               })
-            })
-      })
+        })
+  }
+
 })
 
 document.getElementById('filter-pricing').addEventListener('change', (event) => {

@@ -247,10 +247,9 @@ document.getElementById("confirm").addEventListener("click", (event) => {
                   res.forEach((data) => {
                     if((data.utility_id === utility || utility === '') && (data.type_id === type || type === '') && (data.code_id === code || code === '' || file === "codes") && (data.title === title || title === '') && (document.getElementById(data.id) !== null && document.getElementById(data.id).checked))
                     {
-                      console.log("andar")
                       let val = document.getElementById('percentage').value;
                       val = parseInt(val)
-                      res = (parseInt(data.rate) * val) / 100;
+                      res = parseInt(((parseInt(data.rate) * val) / 100).toString());
                       if(document.querySelector('input[name="inlineRadioOptions"]:checked').value === 'inc')
                       {
                         data.rate = parseInt(data.rate) + res ;

@@ -82,11 +82,11 @@
                                 <i class="fas fa-dollar-sign"></i>
                                 <span class="bot-line"></span>Pricing</a>
                         </li>
-                        <li class="has-sub">
-                            <a href="#">
+                        <li id="dpd1" class="has-sub">
+                            <a href="#" onclick="openModal(2)">
                                 <i class="fas fa-wrench"></i>
                                 <span class="bot-line"></span>Tools</a>
-                            <ul class="header3-sub-list list-unstyled">
+                            <ul id="dpdb1" class="header3-sub-list list-unstyled d-none">
                                 <li>
                                     <div class="account-dropdown__item">
                                         <a href="../screens/tools/utility.html">
@@ -135,9 +135,9 @@
                 </div>
                 <!-- Settings-->
                 <div class="header__tool">
-                    <div class="header-button-item js-item-menu">
-                        <i class="zmdi zmdi-settings"></i>
-                        <div class="setting-dropdown js-dropdown">
+                    <div id="dpd" class="header-button-item js-item-menu">
+                        <i class="zmdi zmdi-settings" onclick="openModal(1)"></i>
+                        <div id="dpdb" class="setting-dropdown js-dropdown d-none">
                             <div class="account-dropdown__body">
                                 <div class="account-dropdown__item">
                                     <a href="../screens/settings/firm-information.html">
@@ -413,7 +413,7 @@
                                             <label for="manual-input"
                                                    style="white-space: nowrap; font-size: 13px"
                                                    class="mr-1 form-control-label my-auto">
-                                                Manual No.&ensp;&ensp;
+                                                Reference No.&ensp;&ensp;
                                             </label>
                                                 <div class="input-group">
                                                     <input
@@ -607,19 +607,19 @@
                                     </div>
                                     <div class="form-group px-1">
                                         <label for="door-panel" class="form-control-label ">Door Panel</label>
-                                        <select name="carcass" required id="door-panel" class="form-control p-0" style="font-size: small; width: 120px; color: black">
+                                        <select name="carcass"  id="door-panel" class="form-control p-0" style="font-size: small; width: 120px; color: black">
 
                                         </select>
                                     </div>
                                     <div class="form-group px-1">
                                         <label for="handler" class="form-control-label ">Handles</label>
-                                        <select name="carcass" required id="handler" class="form-control p-0" style="font-size: small; width: 90px; color: black">
+                                        <select name="carcass"  id="handler" class="form-control p-0" style="font-size: small; width: 90px; color: black">
 
                                         </select>
                                     </div>
                                     <div class="form-group px-1">
                                         <label for="hardware" class="form-control-label ">Hardware</label>
-                                        <select name="carcass" required id="hardware" class="form-control p-0" style="font-size: small; width: 100px; color: black">
+                                        <select name="carcass"  id="hardware" class="form-control p-0" style="font-size: small; width: 100px; color: black">
 
                                         </select>
                                     </div>
@@ -644,13 +644,13 @@
                                         </select>
                                     </div>
                                     <div class="form-group px-1" style="display: flex; flex-direction: column">
-                                        <label for="unit" class="form-control-label ">Unit</label>
-                                        <input type="number" id="unit" class="form-control p-0" readonly style="width: 70px; font-size: small; text-align: right" min="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" />
+                                        <label for="unit" class="form-control-label ">Unit Price</label>
+                                        <input type="number" id="unit" class="form-control" readonly style="padding: 0px; width: 70px; font-size: 11.6px; height: 33.5px; padding-left: 10px; text-align: center" min="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" />
 <!--                                        <span style="background: gainsboro; padding: 5px; width: 50px" id="unit">0</span>-->
                                     </div>
                                     <div class="form-group px-1" style="display: flex; flex-direction: column">
                                         <label for="total" class="form-control-label ">Total</label>
-                                        <span style="background: gainsboro; padding: 5px; width: 70px; height: 35px; text-align: right; vertical-align: center" id="total">0</span>
+                                        <span style="background: gainsboro; padding: 5px; width: 70px; height: 33.5px; text-align: center;  padding-top: 8px;  vertical-align: center" id="total">0</span>
                                     </div>
                                     <div class="px-1" style="width: 100px; padding-top: 30px;text-align: center; display: flex; flex-direction: row;">
                                         <button id="add" type="submit" class="btn btn-primary px-2"  style="width: 50px; height: 30px; font-size: smaller; float: left; margin-right: 5px">ADD</button>
@@ -659,7 +659,7 @@
                                 </div>
                             </form>
                                 <div class="table-responsive table-responsive-data2" style="height: 250px; overflow: auto">
-                                    <table class="table table-data2 pricing-tble" id="my-table" style="border: 2px solid black; border-collapse: separate; border-spacing: 0px" >
+                                    <table class="table table-data2 pricing-tble" id="my-table" style="border: 1px solid black; border-collapse: separate; border-spacing: 0px" >
                                         <thead>
                                             <tr style="text-align: center; background-color: darkgrey">
                                                 <th class="p-1" style="width: 120px; border: 1px solid black; color: black;">
@@ -820,7 +820,7 @@
                                     <th class="py-2" style=" border: 1px solid black">Pricing No.</th>
                                     <th class="py-2" style=" border: 1px solid black">Date</th>
                                     <th class="py-2" style=" border: 1px solid black">Customer</th>
-                                    <th class="py-2" style=" border: 1px solid black">Manual No</th>
+                                    <th class="py-2" style=" border: 1px solid black">Reference No</th>
                                     <th class="py-2" style=" border: 1px solid black">Type</th>
                                 </tr>
                             </thead>
@@ -842,10 +842,82 @@
                 </div>
             </div>
         </div>
+
+        <button class="d-none" data-toggle="modal" data-target="#staticModal-2" id="show-modal"></button>
+        <div class="modal fade" id="staticModal-2" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="">Enter Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('pass2').value=''" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-10 mr-auto ml-auto">
+                                <input type="password" id="pass2" placeholder="Password..." class="form-control"
+                                       required />
+                                <input id="numb" placeholder="Password..." class="d-none"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="cancel2" onclick="document.getElementById('pass2').value = ''">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirm2">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- END PAGE CONTAINER-->
     </div>
 
 </div>
+
+<script>
+  const path1 = require('path')
+  const remote1 = require('electron').remote;
+  const file_manager1 = remote1.require(path1.join(__dirname, '../scripts/file_manager.js'));
+  function openModal(a) {
+    document.getElementById('show-modal').click();
+    document.getElementById('numb').value = a;
+  }
+
+  document.getElementById('confirm2').addEventListener('click', (event) => {
+    file_manager1
+        .loadFile(path1.join(__dirname, "../db/.credentials.json"))
+        .then((res) => {
+          if (res[1].pass === document.getElementById("pass2").value) {
+            if(document.getElementById('numb').value === '2')
+            {
+              document.getElementById('dpdb1').classList.remove('d-none')
+              document.getElementById('cancel2').click();
+            }
+            else
+            {
+              document.getElementById('dpdb').classList.remove('d-none')
+              setTimeout(() => {document.getElementById('dpd').classList.add('show-dropdown')}, 300)
+              document.getElementById('cancel2').click();
+            }
+          }
+          else {
+            alert("Invalid Password!")
+          }
+        })
+  })
+
+  document.getElementById('dpdb').addEventListener('mouseleave', (event) => {
+    document.getElementById('dpdb').classList.add('d-none')
+  })
+  document.getElementById('dpdb1').addEventListener('mouseleave', (event) => {
+    document.getElementById('dpdb1').classList.add('d-none')
+  })
+  document.getElementById('dpd1').addEventListener('mouseleave', (event) => {
+    document.getElementById('dpdb1').classList.add('d-none')
+  })
+</script>
 
 <script>
   window.jQuery = window.$ = require('jquery');
