@@ -104,6 +104,171 @@ document.getElementById('delete').addEventListener('click', (event) => {
   discount_and_tax()
 })
 
+
+function change_code_rate(event){
+  if(event.which === 13)
+  {
+    event.preventDefault();
+    file_manager.loadFile(path.join(__dirname, `../db/.codes.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === document.getElementById('code').value)
+              {
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - code_rate;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                try {
+                  code_rate = parseInt(i.rate)
+                  code_rate = code_rate * parseInt(document.getElementById('code-new-rate').value)
+                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
+                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
+                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = code_rate + back_area + edging + screws + secondary_top;
+                }
+                catch (e){
+                  code_rate = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + code_rate;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+              }
+            })
+          })
+        })
+  }
+}
+
+
+function change_finishing_rate(event){
+  if(event.which === 13)
+  {
+    event.preventDefault();
+    file_manager.loadFile(path.join(__dirname, `../db/.doors.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === document.getElementById('door-panel').value)
+              {
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - door;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                try{
+                  door = parseInt(i.rate)
+                  door = door * parseInt(document.getElementById('finishing-new-rate').value);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = door + edging;
+                }
+                catch (e) {
+                  door = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + door;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+              }
+            })
+          })
+          
+        })
+  }
+}
+
+
+function change_handles_rate(event){
+  if(event.which === 13)
+  {
+    event.preventDefault();
+    file_manager.loadFile(path.join(__dirname, `../db/.handlers.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === document.getElementById('handler').value)
+              {
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - handler;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                try{
+                  handler = parseInt(i.rate)
+                  handler = handler * parseInt(document.getElementById('handle-new-rate').value);
+                }
+                catch (e) {
+                  handler = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + handler;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+              }
+            })
+          })
+         
+        })
+  }
+}
+
+
+function change_hardware_rate(event){
+  if(event.which === 13)
+  {
+    event.preventDefault();
+    file_manager.loadFile(path.join(__dirname, `../db/.hardwares.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === document.getElementById('hardware').value)
+              {
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - hardware;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                try{
+                  hardware = parseInt(i.rate)
+                  hardware = hardware * parseInt(document.getElementById('harware-new-rate').value);
+                }
+                catch (e) {
+                  hardware = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + hardware;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+              }
+            })
+          })
+         
+        })
+  }
+}
+
+
+function change_shelve_rate(event){
+  if(event.which === 13)
+  {
+    
+    file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === document.getElementById("shelves").value)
+              {
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - shelve;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                try{
+                  shelve = parseInt(i.rate)
+                  shelve = shelve * parseInt(document.getElementById('shelve-new-rate').value);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
+                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = shelve + edging + pins;
+                }
+                catch (e) {
+                  shelve = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+              }
+            })
+          })
+          
+        })
+  }
+}
+
+
 document.getElementById('edit').addEventListener('click', (event) => {
   event.preventDefault()
 
@@ -150,6 +315,30 @@ document.getElementById('edit').addEventListener('click', (event) => {
           }
         })
         document.getElementById('code').value = item.code;
+        file_manager.loadFile(path.join(__dirname, `../db/.codes.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === item.code)
+              {
+                try {
+                  code_rate = parseInt(i.rate)
+                  document.getElementById('code-new-rate').value = item.code_rate
+                  code_rate = code_rate * parseInt(item.code_rate);
+                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
+                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
+                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = code_rate + back_area + edging + screws + secondary_top;
+                }
+                catch (e){
+                  code_rate = i.rate
+                }
+              }
+            })
+          })
+        })
       })
 
   document.getElementById('qty').value = item.qty;
@@ -173,6 +362,29 @@ document.getElementById('edit').addEventListener('click', (event) => {
           }
         })
         document.getElementById('door-panel').value = item.door_panel;
+        file_manager.loadFile(path.join(__dirname, `../db/.doors.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === item.door_panel)
+              {
+                try{
+                  door = parseInt(i.rate)
+                  document.getElementById('finishing-new-rate').value = item.finishing_rate;
+                  door = door * parseInt(item.finishing_rate);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = door + edging;
+                }
+                catch (e) {
+                  door = i.rate
+                }
+              
+              }
+            })
+          })
+          
+        })
       })
 
   file_manager.loadFile(path.join(__dirname, `../db/.handlers.json`))
@@ -194,6 +406,27 @@ document.getElementById('edit').addEventListener('click', (event) => {
           }
         })
         document.getElementById('handler').value = item.handler;
+        file_manager.loadFile(path.join(__dirname, `../db/.handlers.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === item.handler)
+              {
+                try{
+                  handler = parseInt(i.rate)
+                  document.getElementById('handle-new-rate').value = item.handle_rate;
+                  handler = handler * parseInt(item.handle_rate);
+                }
+                catch (e) {
+                  handler = i.rate
+                }
+              
+              }
+            })
+          })
+         
+        })
       })
 
   file_manager.loadFile(path.join(__dirname, `../db/.hardwares.json`))
@@ -215,6 +448,27 @@ document.getElementById('edit').addEventListener('click', (event) => {
           }
         })
         document.getElementById('hardware').value = item.hardware;
+        file_manager.loadFile(path.join(__dirname, `../db/.hardwares.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === item.hardware)
+              {
+                try{
+                  hardware = parseInt(i.rate)
+                  document.getElementById('harware-new-rate').value = item.hardware_rate;
+                  hardware = hardware * parseInt(item.hardware_rate);
+                }
+                catch (e) {
+                  hardware = i.rate
+                }
+              
+              }
+            })
+          })
+          
+        })
       })
 
   file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
@@ -238,6 +492,29 @@ document.getElementById('edit').addEventListener('click', (event) => {
             shelve = parseInt(i.rate);
         })
         document.getElementById('shelves').value = item.shelves;
+        file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
+        .then(res => {
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === item.shelves)
+              {
+                try{
+                  shelve = parseInt(i.rate)
+                  document.getElementById('shelve-new-rate').value = item.shelve_rate;
+                  shelve = shelve * parseInt(item.shelve_rate);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
+                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = shelve + edging + pins;
+                }
+                catch (e) {
+                  shelve = i.rate
+                }
+              }
+            })
+          })
+          
+        })
       })
 
   document.getElementById('is_shelve').value = item.is_shelve;
@@ -317,6 +594,11 @@ function clear_dropdowns() {
   document.getElementById('unit').value = "0";
   document.getElementById('total').innerHTML = "0";
   document.getElementById('unit').readOnly = true;
+  document.getElementById('code-new-rate').value = 0;
+  document.getElementById('finishing-new-rate').value = 0;
+  document.getElementById('harware-new-rate').value = 0;
+  document.getElementById('handle-new-rate').value = 0;
+  document.getElementById('shelve-new-rate').value = 0;
   item = null;
   code_rate = 0;
   door = 0;
@@ -562,6 +844,11 @@ function utility_change(event){
   document.getElementById('handler').innerHTML = ''
   document.getElementById('hardware').innerHTML = ''
   document.getElementById('shelves').innerHTML = ''
+  document.getElementById('code-new-rate').value = 0;
+  document.getElementById('finishing-new-rate').value = 0;
+  document.getElementById('harware-new-rate').value = 0;
+  document.getElementById('handle-new-rate').value = 0;
+  document.getElementById('shelve-new-rate').value = 0;
   code_rate = 0
   door = 0
   handler = 0
@@ -601,6 +888,11 @@ function type_change(event){
   document.getElementById('hardware').innerHTML = ''
   document.getElementById('shelves').innerHTML = ''
   document.getElementById('code').innerHTML = ''
+  document.getElementById('code-new-rate').value = 0;
+  document.getElementById('finishing-new-rate').value = 0;
+  document.getElementById('harware-new-rate').value = 0;
+  document.getElementById('handle-new-rate').value = 0;
+  document.getElementById('shelve-new-rate').value = 0;
   code_rate = 0
   door = 0
   handler = 0
@@ -648,23 +940,38 @@ function code_change(event){
     document.getElementById('handler').innerHTML = '';
     document.getElementById('hardware').innerHTML = '';
     document.getElementById('shelves').innerHTML = '';
+    document.getElementById('code-new-rate').value = 0;
+    document.getElementById('finishing-new-rate').value = 0;
+    document.getElementById('harware-new-rate').value = 0;
+    document.getElementById('handle-new-rate').value = 0;
+    document.getElementById('shelve-new-rate').value = 0;
   }
   else
   {
     file_manager.loadFile(path.join(__dirname, `../db/.codes.json`))
         .then(res => {
-          res.forEach(i => {
-            if(i.id === code)
-            {
-              try {
-                code_rate = parseInt(i.rate)
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === code)
+              {
+                try {
+                  code_rate = parseInt(i.rate)
+                  document.getElementById('code-new-rate').value = rates.rate_codes
+                  code_rate = code_rate * parseInt(rates.rate_codes);
+                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
+                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
+                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = code_rate + back_area + edging + screws + secondary_top;
+                }
+                catch (e){
+                  code_rate = i.rate
+                }
+                document.getElementById('unit').value = code_rate;
+                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * code_rate;
               }
-              catch (e){
-                code_rate = i.rate
-              }
-              document.getElementById('unit').value = code_rate;
-              document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * code_rate;
-            }
+            })
           })
         })
     door = 0
@@ -857,7 +1164,12 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "is_shelve": document.getElementById('is_shelve').value,
     "custom": document.getElementById('custom').value,
     "unit": parseInt(document.getElementById('unit').value),
-    "total": parseInt(document.getElementById('total').innerHTML)
+    "total": parseInt(document.getElementById('total').innerHTML),
+    "code_rate": document.getElementById('code-new-rate').value,
+    "finishing_rate": document.getElementById('finishing-new-rate').value,
+    "handle_rate": document.getElementById('handle-new-rate').value,
+    "hardware_rate": document.getElementById('harware-new-rate').value,
+    "shelve_rate": document.getElementById('shelve-new-rate').value,
   }
   if(document.getElementById('is_shelve').value === 'no')
   {
@@ -965,19 +1277,27 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
   {
     file_manager.loadFile(path.join(__dirname, `../db/.doors.json`))
         .then(res => {
-          res.forEach(i => {
-            if(i.id === val)
-            {
-              try{
-                door = parseInt(i.rate)
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === val)
+              {
+                try{
+                  door = parseInt(i.rate)
+                  document.getElementById('finishing-new-rate').value = rates.rate_doors;
+                  door = door * parseInt(rates.rate_doors);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = door + edging;
+                }
+                catch (e) {
+                  door = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + door;
+                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
               }
-              catch (e) {
-                door = i.rate
-              }
-              document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + door;
-              document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
-            }
+            })
           })
+          
         })
   }
 })
@@ -994,19 +1314,25 @@ document.getElementById('handler').addEventListener('change', (event) => {
   {
     file_manager.loadFile(path.join(__dirname, `../db/.handlers.json`))
         .then(res => {
-          res.forEach(i => {
-            if(i.id === val)
-            {
-              try{
-                handler = parseInt(i.rate)
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === val)
+              {
+                try{
+                  handler = parseInt(i.rate)
+                  document.getElementById('handle-new-rate').value = rates.rate_handles;
+                  handler = handler * parseInt(rates.rate_handles);
+                }
+                catch (e) {
+                  handler = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + handler;
+                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
               }
-              catch (e) {
-                handler = i.rate
-              }
-              document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + handler;
-              document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
-            }
+            })
           })
+         
         })
   }
 })
@@ -1023,19 +1349,25 @@ document.getElementById('hardware').addEventListener('change', (event) => {
   {
     file_manager.loadFile(path.join(__dirname, `../db/.hardwares.json`))
         .then(res => {
-          res.forEach(i => {
-            if(i.id === val)
-            {
-              try{
-                hardware = parseInt(i.rate)
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === val)
+              {
+                try{
+                  hardware = parseInt(i.rate)
+                  document.getElementById('harware-new-rate').value = rates.rate_hardware;
+                  hardware = hardware * parseInt(rates.rate_hardware);
+                }
+                catch (e) {
+                  hardware = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + hardware;
+                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
               }
-              catch (e) {
-                hardware = i.rate
-              }
-              document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + hardware;
-              document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
-            }
+            })
           })
+          
         })
   }
 })
@@ -1052,20 +1384,29 @@ document.getElementById('shelves').addEventListener('change', (event) => {
   {
     file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
         .then(res => {
-          res.forEach(i => {
-            if(i.id === val)
-            {
-              try{
-                shelve = parseInt(i.rate)
+          file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
+            res.forEach(i => {
+              if(i.id === val)
+              {
+                try{
+                  shelve = parseInt(i.rate)
+                  document.getElementById('shelve-new-rate').value = rates.rate_shelve;
+                  shelve = shelve * parseInt(rates.rate_shelve);
+                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
+                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = shelve + edging + pins;
+                }
+                catch (e) {
+                  shelve = i.rate
+                }
+                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
+                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+                document.getElementById('is_shelve').value = 'yes';
               }
-              catch (e) {
-                shelve = i.rate
-              }
-              document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
-              document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
-              document.getElementById('is_shelve').value = 'yes';
-            }
+            })
           })
+          
         })
   }
 })
@@ -1105,7 +1446,6 @@ document.getElementById('confirm').addEventListener('click', (event) => {
                     old_pricing.forEach((l, ind) => {
                       if(l['pinfo'].id == pricing["pinfo"].id)
                       {
-                        console.log('yes')
                         pricing["pinfo"] = {
                           "id": l['pinfo'].id ,
                           "pricing_no": document.getElementById('pricing-no').value,
@@ -1391,7 +1731,6 @@ function close_modal(event) {
   // document.getElementById('load-pricing-table').innerHTML = ''
   // document.getElementById('checkbox-all-open').checked = false;
   // document.getElementById('confirm-1').disabled = true;
-  console.log('close')
 }
 
 document.getElementById('print').addEventListener('click', async function (event)  {
@@ -1770,6 +2109,11 @@ $(document).ready(() => {
   document.getElementById('discount').disabled = true;
   document.getElementById('is_quotation').checked = true;
   document.getElementById('calculated-tax').value = 0;
+  document.getElementById('code-new-rate').value = 0;
+  document.getElementById('finishing-new-rate').value = 0;
+  document.getElementById('harware-new-rate').value = 0;
+  document.getElementById('handle-new-rate').value = 0;
+  document.getElementById('shelve-new-rate').value = 0;
   file_manager.loadFile(path.join(__dirname, `../db/.pricings.json`))
       .then(res => {
         if(res.length === 0)
