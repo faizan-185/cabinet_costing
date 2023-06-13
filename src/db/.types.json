@@ -1,0 +1,362 @@
+[
+  {
+    "id": "1",
+    "title": "Single Hinge Door",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "2",
+    "title": "Double Hinge Door",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "3",
+    "title": "Pull Out Basket Unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "4",
+    "title": "Drawer Unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "6",
+    "title": "Corner Unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "7",
+    "title": "Sink Unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "8",
+    "title": "Oven unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "9",
+    "title": "Decorative Rack",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "10",
+    "title": "Drawer With SH Door",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "11",
+    "title": "Drawer With DH Door",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "12",
+    "title": "DD Corner Unit",
+    "utility_id": "1",
+    "utility": "Base Unit"
+  },
+  {
+    "id": "13",
+    "title": "Single Hinge Door",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "14",
+    "title": "Double Hinge Door ",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "15",
+    "title": "Double Flap Unit",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "16",
+    "title": "Single Flap Unit-R",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "17",
+    "title": "Single Flap Unit-L",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "18",
+    "title": "Diagonal Corner ",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "19",
+    "title": "Decorative Rack",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "20",
+    "title": "Single Door Corner ",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "21",
+    "title": "DD Corner",
+    "utility_id": "2",
+    "utility": "Wall Unit"
+  },
+  {
+    "id": "22",
+    "title": "Full Larder Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "23",
+    "title": "Pull Out Pantry ",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "24",
+    "title": "Backing Oven Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "25",
+    "title": "M-Oven Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "26",
+    "title": "Oven & MO Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "27",
+    "title": "Built-in Fridge Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "28",
+    "title": "Side By Side Fridge Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "29",
+    "title": "Oven Unit With 2 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "30",
+    "title": "MO Unit With 2 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "31",
+    "title": "BO & MO With 2 BD ",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "32",
+    "title": "SD Crockery Cabinet",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "33",
+    "title": "DD Crockery Cabinet",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "34",
+    "title": "SD Crockery With 1 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "35",
+    "title": "DD Crockery With 1 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "36",
+    "title": "SD Crockery With 2 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "37",
+    "title": "DD Crockery With 2 BD",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "38",
+    "title": "Larder Unit",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "39",
+    "title": "Pull Out Pantry ",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "40",
+    "title": "BOV Unit",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "41",
+    "title": "MOV Unit",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "42",
+    "title": "BOV & MOV With 1 BD",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "43",
+    "title": "Roller Shutter Unit",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "44",
+    "title": "BOV Unit with 2 BD",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "45",
+    "title": "MOV Unit with 2 BD",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "46",
+    "title": "SD Crockery With 1 BD",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "47",
+    "title": "DD Crockery With 1 BD",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "48",
+    "title": "SD Crockery Cabinet",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "49",
+    "title": "DD Crockery Cabinet",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  },
+  {
+    "id": "50",
+    "title": "Base Unit-F",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "51",
+    "title": "Wall Unit-F",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "52",
+    "title": "Tall Unit-F",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "53",
+    "title": "Med Tall Unit-F",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "54",
+    "title": "Base Unit-Cstm",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "55",
+    "title": "Wall Unit-Cstm",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "56",
+    "title": "Tall Unit-Cstm",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "57",
+    "title": "Med Tall Unit-Cstm",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "58",
+    "title": "Customized",
+    "utility_id": "5",
+    "utility": "Side Panel"
+  },
+  {
+    "id": "59",
+    "title": "Customized ",
+    "utility_id": "6",
+    "utility": "Back Panel"
+  },
+  {
+    "id": "60",
+    "title": "Decorative Rack",
+    "utility_id": "3",
+    "utility": "Tall Unit"
+  },
+  {
+    "id": "61",
+    "title": "Decorative Rack ",
+    "utility_id": "4",
+    "utility": "Medium Tall Unit"
+  }
+]
