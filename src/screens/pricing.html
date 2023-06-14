@@ -456,30 +456,30 @@
                                     </div>
                                 </div>
                                 <div class="row" style="height: 40px; border-bottom: 1px black dashed; margin-bottom: 5px; font-size: small; height: 40px; margin-left: 0px; margin-right: 0px">
-                                    <div class="form-group" style="padding-right: 13px; padding-left: 35px">
+                                    <div class="form-group" style="padding-right: 10px; padding-left: 0px">
                                         <div class="d-flex flex-row">
                                             <label
                                                     for="product-input"
                                                     style="color: black"
                                                     class="mr-1 form-control-label my-auto">
-                                                Client &ensp;&ensp;
+                                                Client &ensp;
                                             </label>
                                                 <select
                                                         class="form-control "
                                                         required
                                                         id="client-input"
-                                                        style="font-weight: normal; font-size: small; width: 200px; color: black">
+                                                        style="font-weight: normal; font-size: small; width: 150px; color: black">
 
                                                 </select>
                                         </div>
                                     </div>
-                                    <div class="form-group px-3 mr-3">
+                                    <div class="form-group px-2 mr-1">
                                         <div class="d-flex flex-row">
                                             <label
                                                     for="product-input"
                                                     style="color: black; width: 160px"
                                                     class="mr-1 form-control-label my-auto">
-                                                Product Type&ensp;&ensp;
+                                                Product Type&ensp;
                                             </label>
                                             <div class="input-group">
                                                 <input
@@ -490,7 +490,7 @@
                                                         placeholder="Select"
                                                         id="product-input"
                                                         required
-                                                        style="font-weight: normal; font-size: small; width: 140px;  color: black"/>
+                                                        style="font-weight: normal; font-size: small; width: 130px;  color: black"/>
 
                                             </div>
                                                 <i data-toggle="tooltip"
@@ -508,9 +508,9 @@
                                         <div class="d-flex flex-row">
                                             <label
                                                     for="sales-input"
-                                                    style="color: black; width: 100px"
+                                                    style="color: black; width: 85px"
                                                     class="mr-1 form-control-label my-auto">
-                                                Sales RP&ensp;&ensp;
+                                                Sales RP
                                             </label>
                                             <div class="input-group">
                                                 <input
@@ -521,7 +521,7 @@
                                                         placeholder="Select"
                                                         required
                                                         id="sales-input"
-                                                        style="font-weight: normal; font-size: small; width: 180px; color: black"/>
+                                                        style="font-weight: normal; font-size: small; width: 130px; color: black"/>
 
                                             </div>
                                                 <i data-toggle="tooltip"
@@ -535,23 +535,52 @@
                                         </div>
 
                                     </div>
-                                    <div class="form-group " style="padding-left: 25px">
+                                    <div class="form-group " style="padding-left: 15px">
+                                        <div class="d-flex flex-row">
+                                            <label
+                                                    for="category-input"
+                                                    style="color: black; width: 85px;"
+                                                    class="mr-1 form-control-label my-auto py-1">
+                                                Category
+                                            </label>
+                                                <div class="input-group">
+                                                    <input onkeypress="save_dropdown(event, 'category', 'category-input')"
+                                                           onkeydown="update_dropdown_del(event, 'category', 'category-input')"
+                                                           class="ml-1 form-control "
+                                                           list="category"
+                                                           placeholder="Select"
+                                                           id="category-input"
+                                                           required
+                                                           style="font-weight: normal; font-size: small; width: 120px; color: black"/>
+
+                                                </div>
+                                                <i data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="Press Enter/Delete to save or delete." style="margin-top: 12px"
+                                                   class="zmdi zmdi-long-arrow-return ml-2  font-weight-bold text-danger">
+                                                </i>
+                                            <datalist id="category" >
+
+                                            </datalist>
+                                        </div>
+                                    </div>
+                                    <div class="form-group " style="padding-left: 15px">
                                         <div class="d-flex flex-row">
                                             <label
                                                     for="carcass-input"
                                                     style="color: black"
                                                     class="mr-1 form-control-label my-auto py-1">
-                                                Carcass &ensp;&ensp;
+                                                Carcass 
                                             </label>
                                                 <div class="input-group">
                                                     <input onkeypress="save_dropdown(event, 'carcass', 'carcass-input')"
                                                            onkeydown="update_dropdown_del(event, 'carcass', 'carcass-input')"
-                                                           class="form-control "
+                                                           class="ml-1 form-control "
                                                            list="carcass"
                                                            placeholder="Select"
                                                            id="carcass-input"
                                                            required
-                                                           style="font-weight: normal; font-size: small; width: 170px; color: black"/>
+                                                           style="font-weight: normal; font-size: small; width: 130px; color: black"/>
 
                                                 </div>
                                                 <i data-toggle="tooltip"
@@ -565,8 +594,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="padding: 5px; padding-bottom: 0px; height: 45px;">
-                                    <div class="form-group" style="padding-right: 13px; padding-left: 8px">
+                                <div class="row" style="padding-top: 5px; padding-bottom: 0px; height: 45px; margin-left: 0px; margin-right: 0px; border: 1px solid black; background-color: gainsboro;">
+                                    <div class="form-group" style="padding-right: 13px; padding-left: 8px; ">
                                         <div class="d-flex flex-row">
                                             <label
                                                     for="code-new-rate"
@@ -579,7 +608,7 @@
                                                     required
                                                     onkeypress="change_code_rate(event)"
                                                     id="code-new-rate"
-                                                    style="font-weight: normal; font-size: small; width: 80px; color: black; height: 30px;" />
+                                                    style="font-weight: normal; font-size: small; width: 75px; color: black; height: 30px;" />
                                                 <i data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Press Enter to update rate."
@@ -593,14 +622,14 @@
                                                     for="finishing-new-rate"
                                                     style="color: black; font-size: 12px;"
                                                     class="mr-1 form-control-label my-auto">
-                                                Panel Area Price / PC &ensp;&ensp;
+                                                Panel Sheet Price / PC &ensp;&ensp;
                                             </label>
                                                 <input
                                                         class="form-control "
                                                         required
                                                         id="finishing-new-rate"
                                                         onkeypress="change_finishing_rate(event)"
-                                                        style="font-weight: normal; font-size: small; width: 80px; color: black; height: 30px;" />
+                                                        style="font-weight: normal; font-size: small; width: 75px; color: black; height: 30px;" />
                                                     <i data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Press Enter to update rate."
@@ -621,7 +650,7 @@
                                                         required
                                                         id="harware-new-rate"
                                                         onkeypress="change_hardware_rate(event)"
-                                                        style="font-weight: normal; font-size: small; width: 80px; color: black; height: 30px;" />
+                                                        style="font-weight: normal; font-size: small; width: 75px; color: black; height: 30px;" />
                                                         <i data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Press Enter to update rate."
@@ -642,7 +671,7 @@
                                                         required
                                                         id="handle-new-rate"
                                                         onkeypress="change_handles_rate(event)"
-                                                        style="font-weight: normal; font-size: small; width: 80px; color: black; height: 30px;" />
+                                                        style="font-weight: normal; font-size: small; width: 75px; color: black; height: 30px;" />
                                                     <i data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Press Enter to update rate."
@@ -663,7 +692,7 @@
                                                         required
                                                         id="shelve-new-rate"
                                                         onkeypress="change_shelve_rate(event)"
-                                                        style="font-weight: normal; font-size: small; width: 80px; color: black; height: 30px;" />
+                                                        style="font-weight: normal; font-size: small; width: 75px; color: black; height: 30px;" />
                                                         <i data-toggle="tooltip"
                                                         data-placement="top"
                                                         title="Press Enter to update rate."
@@ -777,7 +806,7 @@
                                     <table class="table table-data2 pricing-tble" id="my-table" style="border: 1px solid black; border-collapse: separate; border-spacing: 0px" >
                                         <thead>
                                             <tr style="text-align: center; background-color: darkgrey">
-                                                <th class="p-1" style="width: 120px; border: 1px solid black; color: black;">
+                                                <th class="p-1" style="width: 60px; border: 1px solid black; color: black;">
                                                     <label class="au-checkbox">
                                                         <input
                                                                 type="checkbox"
@@ -790,15 +819,15 @@
                                                                 style="border: 1px solid green"
                                                         ></span>
                                                     </label>
-                                                    <p style="margin-left: 30px; margin-top: -8px">Select All</p>
+                                                    <p style="margin-left: 20px; margin-top: -8px">All</p>
 
                                                 </th>
                                                 <th class="p-1" style="width: 40px; color: black; border: 1px solid black;">No.</th>
                                                 <th class="p-1" style="width: 150px; border: 1px solid black; color: black;">Utility</th>
-                                                <th class="p-1" style="width: 150px; border: 1px solid black; color: black; ">Type</th>
+                                                <th class="p-1" style="width: 185px; border: 1px solid black; color: black; ">Description</th>
                                                 <th class="p-1" style="width: 70px; border: 1px solid black; color: black;">Code</th>
                                                 <th class="p-1" style="width: 35px; border: 1px solid black; color: black;">Qty</th>
-                                                <th class="p-1" style="width: 140px; border: 1px solid black; color: black; ">Finishing</th>
+                                                <th class="p-1" style="width: 175px; border: 1px solid black; color: black; ">Finishing</th>
                                                 <th class="p-1" style="width: 100px; border: 1px solid black; color: black; ">Handles</th>
                                                 <th class="p-1" style="width: 120px; border: 1px solid black; color: black; ">Hardware</th>
                                                 <th class="p-1" style="width: 105px; border: 1px solid black; color: black;">Adj. Shelves</th>
@@ -921,14 +950,14 @@
                         <table id="table" class="table table-sm" style="width: 700px">
                             <thead style="background-color: darkgrey">
                                 <tr style="text-align: center">
-                                    <th class="py-2" style="border: 1px solid black; width: 135px">
+                                    <th class="py-2" style="border: 1px solid black; width: 70px">
                                         <label class="au-checkbox my-auto">
                                             <input type="checkbox" id="checkbox-all-open"
                                                    style="border: 1px solid green">
                                             <span class="au-checkmark" id="checkbox-all-box-open"
                                                   style="border: 1px solid green"></span>
                                         </label>
-                                        <p style="margin-left: 30px; ">Select All</p>
+                                        <p style="margin-left: 20px; ">All</p>
                                     </th>
                                     <th class="py-2" style="border: 1px solid black">No.</th>
                                     <th class="d-none" style=" border: 1px solid black">id</th>

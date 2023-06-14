@@ -229,7 +229,6 @@ function change_hardware_rate(event){
               }
             })
           })
-         
         })
   }
 }
@@ -238,7 +237,7 @@ function change_hardware_rate(event){
 function change_shelve_rate(event){
   if(event.which === 13)
   {
-    
+    event.preventDefault();
     file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
         .then(res => {
           file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
@@ -709,7 +708,7 @@ function save_func(event) {
 }
 
 function load_pricing_dropdown() {
-  const files = ['manuals', 'products', 'sales', 'carcass', 'elevations']
+  const files = ['manuals', 'products', 'sales', 'carcass', 'elevations', 'category']
   files.forEach(i => {
     file_manager
         .loadFile(path.join(__dirname, `../db/.${i}.json`))
@@ -1114,7 +1113,7 @@ function populate_table() {
       pricing[i].forEach((j, ind) => {
         table.innerHTML += `
           <tr class="tr-shadow" style=" ">
-            <td class="p-1" style="width: 120px; border-right: 1px solid black; border-bottom: 1px solid black;">
+            <td class="p-1" style="width: 60px; border-right: 1px solid black; border-bottom: 1px solid black;">
               <label class="au-checkbox" style="margin-top: 2.5px"> 
                 <input type="checkbox" id="${i+'~'+j.item_id.toString()}" onchange="toggle(event);">
                 <span class="au-checkmark" style="border: 1px solid green; width: 20px; height: 20px"></span>
@@ -1122,10 +1121,10 @@ function populate_table() {
             </td>
             <td style="width: 40px; color: black; border-right: 1px solid black; border-bottom: 1px solid black;" class="p-1">${count}</td>
             <td class="p-1 might-overflow" style="width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.utility_text}</td>
-            <td class="p-1" style="width: 150px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black;  border-right: 1px solid black; border-bottom: 1px solid black;">${j.type_text}</td>
+            <td class="p-1" style="width: 185px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black;  border-right: 1px solid black; border-bottom: 1px solid black;">${j.type_text}</td>
             <td class="p-1" style="width: 70px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.code_text}</td>
             <td class="p-1" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; width: 35px; border-right: 1px solid black; border-bottom: 1px solid black;">${j.qty}</td>
-            <td class="p-1" style="width: 140px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.door_panel_text}</td>
+            <td class="p-1" style="width: 175px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.door_panel_text}</td>
             <td class="p-1" style="width: 100px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.handler_text}</td>
             <td class="p-1" style="width: 120px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.hardware_text}</td>
             <td class="p-1" style="width: 105px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: black; border-right: 1px solid black; border-bottom: 1px solid black;">${j.shelves_text}</td>
