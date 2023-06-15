@@ -80,6 +80,10 @@ function toggle(event) {
               document.getElementById("clear").disabled = true;
               document.getElementById('edit').disabled = true
             }
+            if(count === data1.length)
+            {
+              document.getElementById("checkbox-all").checked = true;
+            }
           });
       });
   } else {
@@ -97,6 +101,9 @@ function toggle(event) {
             count += 1;
           }
         });
+        if(count < data1.length){
+          document.getElementById("checkbox-all").checked = false;
+        }
         if (count === 0) {
           clearFields();
           populateTable();
@@ -219,7 +226,7 @@ function populateTable() {
       if (data1.length === 0) {
         document.getElementById("client-table").innerHTML = `
           <tr class="tr-shadow" style="border-bottom: 2px solid grey">
-            <td style="border: 1px solid black" style="border: 1px solid black" colspan="4">No Data Added.</td>
+            <td style="border: 1px solid black" style="border: 1px solid black" colspan="8">No Data Added.</td>
           </tr>`;
         document.getElementById("checkbox-all-box").style.display = "none";
       } else {
@@ -624,6 +631,7 @@ function del() {
           if (res === "success") {
             document.getElementById('edit').disabled = true
             alert("Deleted Successfully!");
+            document.getElementById("checkbox-all").checked = false;
             const selected1 = [];
 
             listData.forEach((data) => {

@@ -116,22 +116,22 @@ function change_code_rate(event){
             res.forEach(i => {
               if(i.id === document.getElementById('code').value)
               {
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - code_rate;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - code_rate;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try {
-                  code_rate = parseInt(i.rate)
-                  code_rate = code_rate * parseInt(document.getElementById('code-new-rate').value)
-                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
-                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
-                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = parseFloat(i.rate)
+                  code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                  const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                  const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                  const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
                   code_rate = code_rate + back_area + edging + screws + secondary_top;
                 }
                 catch (e){
                   code_rate = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + code_rate;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + code_rate;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
@@ -151,19 +151,19 @@ function change_finishing_rate(event){
             res.forEach(i => {
               if(i.id === document.getElementById('door-panel').value)
               {
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - door;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
-                  door = parseInt(i.rate)
-                  door = door * parseInt(document.getElementById('finishing-new-rate').value);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = parseFloat(i.rate)
+                  door = door * parseFloat(document.getElementById('finishing-new-rate').value);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_doors);
                   door = door + edging;
                 }
                 catch (e) {
                   door = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + door;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
@@ -184,17 +184,17 @@ function change_handles_rate(event){
             res.forEach(i => {
               if(i.id === document.getElementById('handler').value)
               {
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - handler;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
-                  handler = parseInt(i.rate)
-                  handler = handler * parseInt(document.getElementById('handle-new-rate').value);
+                  handler = parseFloat(i.rate)
+                  handler = handler * parseFloat(document.getElementById('handle-new-rate').value);
                 }
                 catch (e) {
                   handler = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + handler;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + handler;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
@@ -215,17 +215,17 @@ function change_hardware_rate(event){
             res.forEach(i => {
               if(i.id === document.getElementById('hardware').value)
               {
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - hardware;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
-                  hardware = parseInt(i.rate)
-                  hardware = hardware * parseInt(document.getElementById('harware-new-rate').value);
+                  hardware = parseFloat(i.rate)
+                  hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
                 }
                 catch (e) {
                   hardware = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + hardware;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
@@ -245,20 +245,20 @@ function change_shelve_rate(event){
             res.forEach(i => {
               if(i.id === document.getElementById("shelves").value)
               {
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - shelve;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
-                  shelve = parseInt(i.rate)
-                  shelve = shelve * parseInt(document.getElementById('shelve-new-rate').value);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
-                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = parseFloat(i.rate)
+                  shelve = shelve * parseFloat(document.getElementById('shelve-new-rate').value);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_shelve);
+                  const pins = parseFloat(i.pin) * parseFloat(rates.pin_shelve);
                   shelve = shelve + edging + pins;
                 }
                 catch (e) {
                   shelve = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
@@ -322,13 +322,13 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.code)
               {
                 try {
-                  code_rate = parseInt(i.rate)
+                  code_rate = parseFloat(i.rate)
                   document.getElementById('code-new-rate').value = item.code_rate
-                  code_rate = code_rate * parseInt(item.code_rate);
-                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
-                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
-                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = code_rate * parseFloat(item.code_rate);
+                  const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                  const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                  const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
                   code_rate = code_rate + back_area + edging + screws + secondary_top;
                 }
                 catch (e){
@@ -369,10 +369,10 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.door_panel)
               {
                 try{
-                  door = parseInt(i.rate)
+                  door = parseFloat(i.rate)
                   document.getElementById('finishing-new-rate').value = item.finishing_rate;
-                  door = door * parseInt(item.finishing_rate);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = door * parseFloat(item.finishing_rate);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_doors);
                   door = door + edging;
                 }
                 catch (e) {
@@ -413,9 +413,9 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.handler)
               {
                 try{
-                  handler = parseInt(i.rate)
+                  handler = parseFloat(i.rate)
                   document.getElementById('handle-new-rate').value = item.handle_rate;
-                  handler = handler * parseInt(item.handle_rate);
+                  handler = handler * parseFloat(item.handle_rate);
                 }
                 catch (e) {
                   handler = i.rate
@@ -455,9 +455,9 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.hardware)
               {
                 try{
-                  hardware = parseInt(i.rate)
+                  hardware = parseFloat(i.rate)
                   document.getElementById('harware-new-rate').value = item.hardware_rate;
-                  hardware = hardware * parseInt(item.hardware_rate);
+                  hardware = hardware * parseFloat(item.hardware_rate);
                 }
                 catch (e) {
                   hardware = i.rate
@@ -488,7 +488,7 @@ document.getElementById('edit').addEventListener('click', (event) => {
             doors.options.add(opt)
           }
           if(i.id === item.shelves)
-            shelve = parseInt(i.rate);
+            shelve = parseFloat(i.rate);
         })
         document.getElementById('shelves').value = item.shelves;
         file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
@@ -499,11 +499,11 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.shelves)
               {
                 try{
-                  shelve = parseInt(i.rate)
+                  shelve = parseFloat(i.rate)
                   document.getElementById('shelve-new-rate').value = item.shelve_rate;
-                  shelve = shelve * parseInt(item.shelve_rate);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
-                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = shelve * parseFloat(item.shelve_rate);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_shelve);
+                  const pins = parseFloat(i.pin) * parseFloat(rates.pin_shelve);
                   shelve = shelve + edging + pins;
                 }
                 catch (e) {
@@ -651,7 +651,7 @@ function all_clear(){
           document.getElementById('pricing-no').value = "1"
         }
         else {
-          document.getElementById('pricing-no').value = parseInt(res[res.length - 1]["pinfo"].pricing_no) + 1;
+          document.getElementById('pricing-no').value = parseFloat(res[res.length - 1]["pinfo"].pricing_no) + 1;
         }
         document.getElementById("entry-date").valueAsDate = new Date();
         document.getElementById('delivery-days').value = "";
@@ -955,20 +955,20 @@ function code_change(event){
               if(i.id === code)
               {
                 try {
-                  code_rate = parseInt(i.rate)
+                  code_rate = parseFloat(i.rate)
                   document.getElementById('code-new-rate').value = rates.rate_codes
-                  code_rate = code_rate * parseInt(rates.rate_codes);
-                  const back_area = parseInt(i.back_area) * parseInt(rates.back_area_codes);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_codes);
-                  const screws = parseInt(i.screws) * parseInt(rates.screws_codes);
-                  const secondary_top = parseInt(i.secondary_top) * parseInt(rates.secondary_top_codes);
+                  code_rate = code_rate * parseFloat(rates.rate_codes);
+                  const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                  const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                  const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
                   code_rate = code_rate + back_area + edging + screws + secondary_top;
                 }
                 catch (e){
                   code_rate = i.rate
                 }
                 document.getElementById('unit').value = code_rate;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * code_rate;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * code_rate;
               }
             })
           })
@@ -1162,8 +1162,8 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "shelves_text": document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text === "Select" ? "" : document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text,
     "is_shelve": document.getElementById('is_shelve').value,
     "custom": document.getElementById('custom').value,
-    "unit": parseInt(document.getElementById('unit').value),
-    "total": parseInt(document.getElementById('total').innerHTML),
+    "unit": parseFloat(document.getElementById('unit').value),
+    "total": parseFloat(document.getElementById('total').innerHTML),
     "code_rate": document.getElementById('code-new-rate').value,
     "finishing_rate": document.getElementById('finishing-new-rate').value,
     "handle_rate": document.getElementById('handle-new-rate').value,
@@ -1226,27 +1226,27 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
   const val = event.target.value;
   if(val === "yes" && shelve === 0){
     // document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
-    // document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value)).toFixed(2);
+    // document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value)).toFixed(2);
       file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
           .then(res => {
             res.forEach(i => {
               if(i.id === document.getElementById('shelves').value)
               {
                 try{
-                  shelve = parseInt(i.rate)
+                  shelve = parseFloat(i.rate)
                 }
                 catch (e) {
                   shelve = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
-                document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
           })
   }
   else if(val === "no" && shelve !== 0){
-    document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - shelve;
-    document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+    document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+    document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
     document.getElementById('shelves').value = ""
     shelve = 0
   }
@@ -1254,20 +1254,20 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
 
 document.getElementById('qty').addEventListener('change', (event) => {
   if(document.getElementById('unit').value !== '0' && document.getElementById('unit').value !== '')
-  document.getElementById('total').innerHTML = parseInt(event.target.value) * parseInt(document.getElementById('unit').value);
+  document.getElementById('total').innerHTML = parseFloat(event.target.value) * parseFloat(document.getElementById('unit').value);
 })
 
 document.getElementById('unit').addEventListener('keyup', (event) => {
   if(document.getElementById('custom').value === 'yes')
   {
-    document.getElementById('total').innerHTML = parseInt(document.getElementById('unit').value) * parseInt(document.getElementById('qty').value)
+    document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value)
   }
 })
 
 document.getElementById('door-panel').addEventListener('change', (event) => {
   const val = event.target.value;
-  document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - door;
-  document.getElementById('total').innerHTML = parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value);
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
+  document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
   if(val === '')
   {
     door = 0
@@ -1282,17 +1282,17 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
               if(i.id === val)
               {
                 try{
-                  door = parseInt(i.rate)
+                  door = parseFloat(i.rate)
                   document.getElementById('finishing-new-rate').value = rates.rate_doors;
-                  door = door * parseInt(rates.rate_doors);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_doors);
+                  door = door * parseFloat(rates.rate_doors);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_doors);
                   door = door + edging;
                 }
                 catch (e) {
                   door = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + door;
-                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
+                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
           })
@@ -1303,8 +1303,8 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
 
 document.getElementById('handler').addEventListener('change', (event) => {
   const val = event.target.value;
-  document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - handler;
-  document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
+  document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
     handler = 0
@@ -1319,15 +1319,15 @@ document.getElementById('handler').addEventListener('change', (event) => {
               if(i.id === val)
               {
                 try{
-                  handler = parseInt(i.rate)
+                  handler = parseFloat(i.rate)
                   document.getElementById('handle-new-rate').value = rates.rate_handles;
-                  handler = handler * parseInt(rates.rate_handles);
+                  handler = handler * parseFloat(rates.rate_handles);
                 }
                 catch (e) {
                   handler = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + handler;
-                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + handler;
+                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
           })
@@ -1338,8 +1338,8 @@ document.getElementById('handler').addEventListener('change', (event) => {
 
 document.getElementById('hardware').addEventListener('change', (event) => {
   const val = event.target.value;
-  document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - hardware;
-  document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
+  document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
     hardware = 0
@@ -1354,15 +1354,15 @@ document.getElementById('hardware').addEventListener('change', (event) => {
               if(i.id === val)
               {
                 try{
-                  hardware = parseInt(i.rate)
+                  hardware = parseFloat(i.rate)
                   document.getElementById('harware-new-rate').value = rates.rate_hardware;
-                  hardware = hardware * parseInt(rates.rate_hardware);
+                  hardware = hardware * parseFloat(rates.rate_hardware);
                 }
                 catch (e) {
                   hardware = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + hardware;
-                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
+                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
           })
@@ -1373,8 +1373,8 @@ document.getElementById('hardware').addEventListener('change', (event) => {
 
 document.getElementById('shelves').addEventListener('change', (event) => {
   const val = event.target.value;
-  document.getElementById('unit').value = parseInt(document.getElementById('unit').value) - shelve;
-  document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+  document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
     shelve = 0
@@ -1389,18 +1389,18 @@ document.getElementById('shelves').addEventListener('change', (event) => {
               if(i.id === val)
               {
                 try{
-                  shelve = parseInt(i.rate)
+                  shelve = parseFloat(i.rate)
                   document.getElementById('shelve-new-rate').value = rates.rate_shelve;
-                  shelve = shelve * parseInt(rates.rate_shelve);
-                  const edging = parseInt(i.edging) * parseInt(rates.edging_shelve);
-                  const pins = parseInt(i.pin) * parseInt(rates.pin_shelve);
+                  shelve = shelve * parseFloat(rates.rate_shelve);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_shelve);
+                  const pins = parseFloat(i.pin) * parseFloat(rates.pin_shelve);
                   shelve = shelve + edging + pins;
                 }
                 catch (e) {
                   shelve = i.rate
                 }
-                document.getElementById('unit').value = parseInt(document.getElementById('unit').value) + shelve;
-                document.getElementById('total').innerHTML = (parseInt(document.getElementById('qty').value) * parseInt(document.getElementById('unit').value));
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
                 document.getElementById('is_shelve').value = 'yes';
               }
             })
@@ -2120,7 +2120,7 @@ $(document).ready(() => {
           document.getElementById('pricing-no').value = "1"
         }
         else {
-          document.getElementById('pricing-no').value = parseInt(res[res.length - 1]["pinfo"].pricing_no) + 1;
+          document.getElementById('pricing-no').value = parseFloat(res[res.length - 1]["pinfo"].pricing_no) + 1;
         }
       })
 });

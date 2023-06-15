@@ -69,6 +69,10 @@ function toggle(event) {
               document.getElementById("edit").disabled = true;
               document.getElementById("clear").disabled = true;
             }
+            if(count === data1.length)
+            {
+              document.getElementById("checkbox-all").checked = true;
+            }
           });
       });
   } else {
@@ -83,6 +87,9 @@ function toggle(event) {
             count += 1;
           }
         });
+        if(count < data1.length){
+          document.getElementById("checkbox-all").checked = false;
+        }
         if (count === 0) {
           document.getElementById("delete-selected").disabled = true;
           document.getElementById("delete-selected-1").disabled = true;
@@ -528,6 +535,7 @@ function del() {
           if (res === "success") {
             document.getElementById('edit').disabled = true
             alert("Deleted Successfully!")
+            document.getElementById("checkbox-all").checked = false;
             // populateTable();
             const selected1 = [];
 

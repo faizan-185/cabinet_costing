@@ -81,6 +81,10 @@ function toggle(event) {
               document.getElementById("clear").disabled = true;
               document.getElementById("update").disabled = true;
             }
+            if(count === data1.length)
+            {
+              document.getElementById("checkbox-all").checked = true;
+            }
           });
       });
   } else {
@@ -98,6 +102,9 @@ function toggle(event) {
             count += 1;
           }
         });
+        if(count < data1.length){
+          document.getElementById("checkbox-all").checked = false;
+        }
         if (count === 0) {
           clearFields();
           populateTable();
@@ -550,6 +557,7 @@ function del() {
           if (res === "success") {
             document.getElementById('edit').disabled = true
             alert("Deleted Successfully!");
+            document.getElementById("checkbox-all").checked = false;
             const selected1 = [];
 
             listData.forEach((data) => {
