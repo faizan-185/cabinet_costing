@@ -602,8 +602,7 @@ document.getElementById("confirm").addEventListener("click", (event) => {
             document.getElementById('select-1').value.trim().length !== 0 &&
             document.getElementById('select-2').value.trim().length !== 0 &&
             document.getElementById('client-name').value.trim().length !== 0 &&
-            document.getElementById('rate').value.trim().length !== 0 &&
-            parseFloat(document.getElementById('rate').value) > 0 )
+            document.getElementById('rate').value.trim().length !== 0 )
         {
           if(res[1].pass === document.getElementById('pass').value)
           {

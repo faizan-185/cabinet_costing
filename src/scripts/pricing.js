@@ -1,6 +1,4 @@
 const remote = require('electron').remote
-// const html2pdf = require("html2pdf.js");
-// const PDFDocument = require('pdf-creator-node');
 const fs = require("fs");
 const path = require('path')
 const file_manager = remote.require(path.join(__dirname, '../scripts/file_manager.js'))
@@ -15,6 +13,7 @@ let hardware = 0
 let shelve = 0
 let check_list = []
 let check_list2 = []
+let custom_val = 0
 
 
 function toggle(event){
@@ -517,9 +516,7 @@ document.getElementById('edit').addEventListener('click', (event) => {
       })
 
   document.getElementById('is_shelve').value = item.is_shelve;
-  document.getElementById('custom').value = item.custom;
-  if(document.getElementById('custom').value === 'yes')
-    document.getElementById('unit').readOnly = false
+  document.getElementById('additional').value = item.additional;
   document.getElementById('unit').value = item.unit;
   document.getElementById('total').innerHTML = item.total;
 
@@ -589,7 +586,7 @@ function clear_dropdowns() {
   document.getElementById('hardware').innerHTML = "";
   document.getElementById('shelves').innerHTML = "";
   document.getElementById('is_shelve').value = "yes";
-  document.getElementById('custom').value = "no";
+  document.getElementById('additional').value = "0";
   document.getElementById('unit').value = "0";
   document.getElementById('total').innerHTML = "0";
   document.getElementById('unit').readOnly = true;
@@ -656,6 +653,7 @@ function all_clear(){
         document.getElementById("entry-date").valueAsDate = new Date();
         document.getElementById('delivery-days').value = "";
         document.getElementById('manual-input').value = "";
+        document.getElementById('category-input').value = "";
         document.getElementById('client-input').value = "";
         document.getElementById('product-input').value = "";
         document.getElementById('sales-input').value = "";
@@ -672,7 +670,7 @@ function all_clear(){
         document.getElementById('hardware').innerHTML = "";
         document.getElementById('shelves').innerHTML = "";
         document.getElementById('is_shelve').value = "yes";
-        document.getElementById('custom').value = "no";
+        document.getElementById('additional').value = "0";
         document.getElementById('unit').value = "0";
         document.getElementById('total').innerHTML = "0";
         document.getElementById('table-body-div').innerHTML = "";
@@ -1161,7 +1159,7 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "shelves": document.getElementById('shelves').value,
     "shelves_text": document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text === "Select" ? "" : document.getElementById('shelves').options[document.getElementById('shelves').selectedIndex].text,
     "is_shelve": document.getElementById('is_shelve').value,
-    "custom": document.getElementById('custom').value,
+    "additional": document.getElementById('additional').value,
     "unit": parseFloat(document.getElementById('unit').value),
     "total": parseFloat(document.getElementById('total').innerHTML),
     "code_rate": document.getElementById('code-new-rate').value,
@@ -1213,12 +1211,38 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
   document.getElementById('edit').disabled = true;
 })
 
-document.getElementById('custom').addEventListener('change', (event) => {
-  if(event.target.value === "yes"){
-    document.getElementById('unit').readOnly = false
+document.getElementById('additional').addEventListener('keyup', (event) => {
+  var key = event.keyCode || event.charCode;
+  if( key == 8 || key == 46 ) {
+    if(parseFloat(document.getElementById('additional').value)){
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+  
+      document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
+      custom_val = parseFloat(document.getElementById('additional').value)
+      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+    }
+    else{
+      if(custom_val!==0)
+      {
+        document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+        document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+    
+        custom_val = 0
+        document.getElementById('additional').value = 0;
+      }
+      
+    }
   }
   else{
-    document.getElementById('unit').readOnly = true
+    if(parseFloat(document.getElementById('additional').value)){
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+  
+      document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
+      custom_val = parseFloat(document.getElementById('additional').value)
+      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+    }
   }
 })
 
@@ -1255,13 +1279,6 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
 document.getElementById('qty').addEventListener('change', (event) => {
   if(document.getElementById('unit').value !== '0' && document.getElementById('unit').value !== '')
   document.getElementById('total').innerHTML = parseFloat(event.target.value) * parseFloat(document.getElementById('unit').value);
-})
-
-document.getElementById('unit').addEventListener('keyup', (event) => {
-  if(document.getElementById('custom').value === 'yes')
-  {
-    document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value)
-  }
 })
 
 document.getElementById('door-panel').addEventListener('change', (event) => {
@@ -1858,7 +1875,7 @@ document.getElementById('print').addEventListener('click', async function (event
                                             <tr style="padding-top: 2.5px; padding-bottom: 2.5px; ">
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2.5px; padding-bottom: 2.5px;">No.</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black; padding-top: 2px; padding-bottom: 2px;">UTILITY</th>
-                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">TYPE</th>
+                                                <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">DESCRIPTION</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">CODE</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">QTY</th>
                                                 <th style="font-weight: bold; font-size: 9px; text-align: center; border: 0.5px solid black;">FINISHING</th>
@@ -1892,13 +1909,13 @@ document.getElementById('print').addEventListener('click', async function (event
                             <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px; font-weight: 500">
                                 <p style="color: black; width: 200px; font-size: 11px;"><b>Pricing No: &nbsp;</b>${document.getElementById('pricing-no').value}</p>
                                 <p style="color: black; width: 170px; font-size: 11px;"><b>Reference No. &nbsp;</b>${document.getElementById('manual-input').value}</p>
-                                <p style="color: black; font-size: 11px; width: 230px;"><b>Delivery Time: &nbsp;</b>${document.getElementById('delivery-days').value} working days</p>
+                                <p style="color: black; font-size: 11px; width: 230px;"><b>Sales RP: &nbsp;</b>${document.getElementById('sales-input').value}</p>
                                 
                             </div>
                             <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1px; font-weight: 500">
                                 <p style="color: black; width: 200px; font-size: 11px;"><b>Product Type: &nbsp;</b>${document.getElementById('product-input').value}</p>
                                 <p style="color: black; width: 170px; font-size: 11px;"><b>Carcass: &nbsp;</b> ${document.getElementById('carcass-input').value}</p>
-                                <p style="color: black; width: 230px; font-size: 11px;"><b>Sales RP: &nbsp;</b>${document.getElementById('sales-input').value}</p>
+                                <p style="color: black; width: 230px; font-size: 11px;"><b>Category: &nbsp;</b>${document.getElementById('category-input').value}</p>
                             </div>
                         </div>
                     </div>
@@ -1914,6 +1931,7 @@ document.getElementById('print').addEventListener('click', async function (event
                           </div>
                     </div>
                     <p style="color: black; font-size: 10px; border-bottom: 1px solid black; width: 105px; margin-top: 10px"><b>Terms & Conditions:</b></p>
+                    <p style="color: black; font-size: 10px; width: 230px; margin-top: 10px; margin-bottom: 5px;"><b>Delivery Time: &nbsp;</b><span style="font-size: 10px; font-weight: 500">${document.getElementById('delivery-days').value} Working Days.<span/></p>
                     ${terms}     
                     <p style="color: red; font-size: 8px"><b>Please Note:</b></p>
                     <p style="color: red; font-size: 8px">Any electrical / plumbing and gas connections for Hob, Hood, Oven & Sink is excluded from our scope of work. To avoid any possible damage to plumbing pipes / electrical wiring, we request you to mark such areas with dotted lines failing which; we accept no responsibility for any such incident, occurred while drilling holes for fixing the cabinets.</p>         
