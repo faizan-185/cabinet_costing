@@ -219,6 +219,10 @@ function change_hardware_rate(event){
                 try{
                   hardware = parseFloat(i.rate)
                   hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                  const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                  hardware = hardware + slider;
+                  const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                  hardware = hardware + lift;
                 }
                 catch (e) {
                   hardware = i.rate
@@ -419,7 +423,6 @@ document.getElementById('edit').addEventListener('click', (event) => {
                 catch (e) {
                   handler = i.rate
                 }
-              
               }
             })
           })
@@ -457,6 +460,10 @@ document.getElementById('edit').addEventListener('click', (event) => {
                   hardware = parseFloat(i.rate)
                   document.getElementById('harware-new-rate').value = item.hardware_rate;
                   hardware = hardware * parseFloat(item.hardware_rate);
+                  const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                  hardware = hardware + slider;
+                  const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                  hardware = hardware + lift;
                 }
                 catch (e) {
                   hardware = i.rate
@@ -926,6 +933,8 @@ function code_change(event){
   const code = event.target.value;
   if(code === '')
   {
+    document.getElementById('additional').value = 0;
+    custom_val = 0
     document.getElementById('unit').value = 0;
     document.getElementById('total').innerHTML = '0'
     code_rate = 0
@@ -1253,19 +1262,27 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
     // document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value)).toFixed(2);
       file_manager.loadFile(path.join(__dirname, `../db/.shelves.json`))
           .then(res => {
+            file_manager.loadFile(path.join(__dirname, `../db/.rates.json`))
+          .then(rates => {
             res.forEach(i => {
-              if(i.id === document.getElementById('shelves').value)
+              if(i.id === document.getElementById("shelve").value)
               {
                 try{
                   shelve = parseFloat(i.rate)
+                  document.getElementById('shelve-new-rate').value = rates.rate_shelve;
+                  shelve = shelve * parseFloat(rates.rate_shelve);
+                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_shelve);
+                  const pins = parseFloat(i.pin) * parseFloat(rates.pin_shelve);
+                  shelve = shelve + edging + pins;
                 }
                 catch (e) {
                   shelve = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
+          })
           })
   }
   else if(val === "no" && shelve !== 0){
@@ -1283,6 +1300,7 @@ document.getElementById('qty').addEventListener('change', (event) => {
 
 document.getElementById('door-panel').addEventListener('change', (event) => {
   const val = event.target.value;
+  document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
   document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
   if(val === '')
@@ -1320,6 +1338,7 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
 
 document.getElementById('handler').addEventListener('change', (event) => {
   const val = event.target.value;
+  document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
   document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
@@ -1355,6 +1374,7 @@ document.getElementById('handler').addEventListener('change', (event) => {
 
 document.getElementById('hardware').addEventListener('change', (event) => {
   const val = event.target.value;
+  document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
   document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
@@ -1371,12 +1391,16 @@ document.getElementById('hardware').addEventListener('change', (event) => {
               if(i.id === val)
               {
                 try{
-                  hardware = parseFloat(i.rate)
+                  hardware = parseFloat(i.rate);
                   document.getElementById('harware-new-rate').value = rates.rate_hardware;
                   hardware = hardware * parseFloat(rates.rate_hardware);
+                  const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                  hardware = hardware + slider;
+                  const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                  hardware = hardware + lift;
                 }
                 catch (e) {
-                  hardware = i.rate
+                  hardware = i.rate;
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));

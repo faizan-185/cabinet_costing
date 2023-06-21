@@ -18,6 +18,8 @@ function clearFields() {
   document.getElementById("select-1").value = "";
   document.getElementById("select-2").value = "";
   document.getElementById("rate").value = "0";
+  document.getElementById("slider").value = "0";
+  document.getElementById("lift").value = "0";
   file_manager
     .loadFile(path.join(__dirname, "../../db/.hardwares.json"))
     .then((res) => {
@@ -357,6 +359,8 @@ function populateTable() {
             <td style="border: 1px solid black">${data.title}</td>
             <td style="border: 1px solid black">${data.code}</td>
             <td style="border: 1px solid black">${data.rate}</td>
+            <td style="border: 1px solid black">${data.slider}</td>
+            <td style="border: 1px solid black">${data.lift}</td>
           </tr>`;
         });
       }
@@ -499,6 +503,8 @@ document.getElementById("form").addEventListener("submit", (event) => {
   const value2 = select_2.value;
   const text2 = select_2.options[select_2.selectedIndex].text;
   const rate = document.getElementById("rate").value;
+  const slider =  document.getElementById("slider").value;
+  const lift = document.getElementById("lift").value;
   const data = {
     id: id,
     title: name,
@@ -509,6 +515,8 @@ document.getElementById("form").addEventListener("submit", (event) => {
     type: text1,
     code_id: value2,
     code: text2,
+    slider: slider,
+    lift: lift,
   };
   listData.push(data);
   file_manager
@@ -599,7 +607,9 @@ document.getElementById("confirm").addEventListener("click", (event) => {
             document.getElementById('select-1').value.trim().length !== 0 &&
             document.getElementById('select-2').value.trim().length !== 0 &&
             document.getElementById('client-name').value.trim().length !== 0 &&
-            document.getElementById('rate').value.trim().length !== 0 )
+            document.getElementById('rate').value.trim().length !== 0 &&
+            document.getElementById("slider").value.trim().length !== "0" &&
+            document.getElementById("lift").value.trim().length !== "0" )
         {
           if (res[1].pass === document.getElementById('pass').value) {
             file_manager
@@ -615,6 +625,8 @@ document.getElementById("confirm").addEventListener("click", (event) => {
                       d.code_id = dd.code_id;
                       d.code = dd.code;
                       d.rate = document.getElementById("rate").value;
+                      d.slider = document.getElementById("slider").value;
+                      d.lift = document.getElementById("lift").value;
                     }
                   });
                   file_manager
@@ -882,6 +894,8 @@ function filter(query) {
             <td style="border: 1px solid black">${data.title}</td>
             <td style="border: 1px solid black">${data.code}</td>
             <td style="border: 1px solid black">${data.rate}</td>
+            <td style="border: 1px solid black">${data.slider}</td>
+            <td style="border: 1px solid black">${data.lift}</td>
           </tr>`;
       });
     });
@@ -943,6 +957,8 @@ function filter_by_dropdown(query, query1, query2) {
             <td style="border: 1px solid black">${data.title}</td>
             <td style="border: 1px solid black">${data.code}</td>
             <td style="border: 1px solid black">${data.rate}</td>
+            <td style="border: 1px solid black">${data.slider}</td>
+            <td style="border: 1px solid black">${data.lift}</td>
           </tr>`;
         });
       });
@@ -1006,6 +1022,8 @@ function filter_by_dropdown_1(query, query1, query2) {
             <td style="border: 1px solid black">${data.title}</td>
             <td style="border: 1px solid black">${data.code}</td>
             <td style="border: 1px solid black">${data.rate}</td>
+            <td style="border: 1px solid black">${data.slider}</td>
+            <td style="border: 1px solid black">${data.lift}</td>
           </tr>`;
         });
       });
@@ -1069,6 +1087,8 @@ function filter_by_dropdown_2(query, query1, query2) {
             <td style="border: 1px solid black">${data.title}</td>
             <td style="border: 1px solid black">${data.code}</td>
             <td style="border: 1px solid black">${data.rate}</td>
+            <td style="border: 1px solid black">${data.slider}</td>
+            <td style="border: 1px solid black">${data.lift}</td>
           </tr>`;
         });
       });

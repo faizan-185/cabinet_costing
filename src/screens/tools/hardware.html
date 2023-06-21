@@ -609,13 +609,51 @@
                           <div class="mb-1 row form-group mr-2">
                             <div class="col col-md-3">
                               <label for="rate" class="form-control-label"
-                                >Quantity</label
+                                >Hinges Qty.</label
                               >
                             </div>
                             <div class="col-12 col-md-9">
                               <input
                                 type="number"
                                 id="rate"
+                                step="any"
+                                placeholder="Enter Unit Rate"
+                                class="form-control"
+                                value="0"
+                                required
+                                style="margin-left: 5px;"
+                              />
+                            </div>
+                          </div>
+                          <div class="mb-1 row form-group mr-2">
+                            <div class="col col-md-3">
+                              <label for="slider" class="form-control-label"
+                                >Sliders Qty.</label
+                              >
+                            </div>
+                            <div class="col-12 col-md-9">
+                              <input
+                                type="number"
+                                id="slider"
+                                step="any"
+                                placeholder="Enter Unit Rate"
+                                class="form-control"
+                                value="0"
+                                required
+                                style="margin-left: 5px;"
+                              />
+                            </div>
+                          </div>
+                          <div class="mb-1 row form-group mr-2">
+                            <div class="col col-md-3">
+                              <label for="lift" class="form-control-label"
+                                >Lift Up Qty.</label
+                              >
+                            </div>
+                            <div class="col-12 col-md-9">
+                              <input
+                                type="number"
+                                id="lift"
                                 step="any"
                                 placeholder="Enter Unit Rate"
                                 class="form-control"
@@ -721,7 +759,9 @@
                           <th class="py-2"  style="border: 1px solid black; width: 50px">id</th>
                           <th class="py-2"  style="border: 1px solid black">title</th>
                           <th  class="py-2" style="border: 1px solid black; width: 120px">code</th>
-                          <th  class="py-2" style="border: 1px solid black; width: 100px">Quantity</th>
+                          <th  class="py-2" style="border: 1px solid black; width: 120px">hinges qty</th>
+                          <th  class="py-2" style="border: 1px solid black; width: 120px">sliders qty</th>
+                          <th  class="py-2" style="border: 1px solid black; width: 120px">lift up qty</th>
                         </tr>
                       </thead>
                       <tbody id="client-table"></tbody>

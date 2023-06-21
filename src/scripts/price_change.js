@@ -20,6 +20,8 @@ $(document).ready(() => {
         document.getElementById('rate-doors').value = res.rate_doors;
         document.getElementById('edging-doors').value = res.edging_doors;
         document.getElementById('rate-hardware').value = res.rate_hardware;
+        document.getElementById('slider-hardware').value = res.slider_hardware;
+        document.getElementById('lift-hardware').value = res.lift_hardware;
         document.getElementById('rate-handles').value = res.rate_handles;
         document.getElementById('rate-shelve').value = res.rate_shelve;
         document.getElementById('pin-shelve').value = res.pin_shelve;
@@ -47,6 +49,8 @@ document.getElementById("confirm").addEventListener("click", (event) => {
             "rate_doors": "10",
             "edging_doors": "10",
             "rate_hardware": "10",
+            "slider_hardware": "10",
+            "lift_hardware": "10",
             "rate_handles": "10",
             "rate_shelve": "10",
             "edging_shelve": "10",
@@ -60,6 +64,8 @@ document.getElementById("confirm").addEventListener("click", (event) => {
           prices.rate_doors = document.getElementById('rate-doors').value;
           prices.edging_doors = document.getElementById('edging-doors').value;
           prices.rate_hardware = document.getElementById('rate-hardware').value;
+          prices.slider_hardware =  document.getElementById('slider-hardware').value;
+          prices.lift_hardware = document.getElementById('lift-hardware').value;
           prices.rate_handles = document.getElementById('rate-handles').value;
           prices.rate_shelve = document.getElementById('rate-shelve').value;
           prices.pin_shelve = document.getElementById('pin-shelve').value;
@@ -94,6 +100,8 @@ document.getElementById("confirm3").addEventListener("click", (event) => {
             "rate_doors": "0",
             "edging_doors": "0",
             "rate_hardware": "0",
+            "slider_hardware": "0",
+            "lift_hardware": "0",
             "rate_handles": "0",
             "rate_shelve": "0",
             "edging_shelve": "0",
@@ -107,6 +115,8 @@ document.getElementById("confirm3").addEventListener("click", (event) => {
           document.getElementById('rate-doors').value = res.rate_doors;
           document.getElementById('edging-doors').value = res.edging_doors;
           document.getElementById('rate-hardware').value = res.rate_hardware;
+          document.getElementById('slider-hardware').value = res.slider_hardware;
+          document.getElementById('lift-hardware').value = res.lift_hardware;
           document.getElementById('rate-handles').value = res.rate_handles;
           document.getElementById('rate-shelve').value = res.rate_shelve;
           document.getElementById('pin-shelve').value = res.pin_shelve;
