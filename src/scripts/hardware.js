@@ -47,54 +47,6 @@ function toggle(event) {
         data1.forEach((data) => {
           if (data.id === event.target.id.toString()) {
             const id = document.getElementById("id");
-            // id.innerHTML = data.id;
-            // file_manager
-            //     .loadFile(path.join(__dirname, "../../db/.types.json"))
-            //     .then((res) => {
-            //       const select = document.getElementById("select-1");
-            //       select.innerHTML = "";
-            //       let option = document.createElement("option");
-            //       option.text = "Please Select";
-            //       option.value = "";
-            //       option.classList.add('d-none');
-            //       select.add(option);
-            //       res.forEach((dat) => {
-            //         if(data.utility_id === dat.utility_id)
-            //         {
-            //           let option = document.createElement("option");
-            //           option.text = dat.title;
-            //           option.value = dat.id;
-            //           select.add(option);
-            //         }
-            //       });
-            //       document.getElementById("select-1").value = data.type_id;
-            //     });
-            // file_manager
-            //     .loadFile(path.join(__dirname, "../../db/.codes.json"))
-            //     .then((res) => {
-            //       const select = document.getElementById("select-2");
-            //       select.innerHTML = "";
-            //       let option = document.createElement("option");
-            //       option.text = "Please Select";
-            //       option.value = "";
-            //       option.classList.add('d-none');
-            //       select.add(option);
-            //       res.forEach((da) => {
-            //         if(data.code_id === da.id)
-            //         {
-            //           let option = document.createElement("option");
-            //           option.text = da.title;
-            //           option.value = da.id;
-            //           select.add(option);
-            //         }
-            //       });
-            //       document.getElementById("select-2").value = data.code_id;
-            //     });
-            // document.getElementById("client-name").value = data.title;
-            // document.getElementById("select").value = data.utility_id;
-            // document.getElementById("select-1").value = data.type_id;
-            // document.getElementById("select-2").value = data.code_id;
-            // document.getElementById("rate").value = data.rate;
             document.getElementById("fieldset").disabled = true;
             document.getElementById("update").disabled = true;
             document.getElementById("save").disabled = true;
@@ -178,54 +130,6 @@ function toggle(event) {
                   document.getElementById(data.id).checked
                 ) {
                   const id = document.getElementById("id");
-                  // id.innerHTML = data.id;
-                  // file_manager
-                  //     .loadFile(path.join(__dirname, "../../db/.types.json"))
-                  //     .then((res) => {
-                  //       const select = document.getElementById("select-1");
-                  //       select.innerHTML = "";
-                  //       let option = document.createElement("option");
-                  //       option.text = "Please Select";
-                  //       option.value = "";
-                  //       option.classList.add('d-none');
-                  //       select.add(option);
-                  //       res.forEach((dat) => {
-                  //         if(data.utility_id === dat.utility_id)
-                  //         {
-                  //           let option = document.createElement("option");
-                  //           option.text = dat.title;
-                  //           option.value = dat.id;
-                  //           select.add(option);
-                  //         }
-                  //       });
-                  //       document.getElementById("select-1").value = data.type_id;
-                  //     });
-                  // file_manager
-                  //     .loadFile(path.join(__dirname, "../../db/.codes.json"))
-                  //     .then((res) => {
-                  //       const select = document.getElementById("select-2");
-                  //       select.innerHTML = "";
-                  //       let option = document.createElement("option");
-                  //       option.text = "Please Select";
-                  //       option.value = "";
-                  //       option.classList.add('d-none');
-                  //       select.add(option);
-                  //       res.forEach((da) => {
-                  //         if(data.code_id === da.id)
-                  //         {
-                  //           let option = document.createElement("option");
-                  //           option.text = da.title;
-                  //           option.value = da.id;
-                  //           select.add(option);
-                  //         }
-                  //       });
-                  //       document.getElementById("select-2").value = data.code_id;
-                  //     });
-                  // document.getElementById("client-name").value = data.title;
-                  // document.getElementById("select").value = data.utility_id;
-                  // document.getElementById("select-1").value = data.type_id;
-                  // document.getElementById("select-2").value = data.code_id;
-                  // document.getElementById("rate").value = data.rate;
                   document.getElementById("fieldset").disabled = true;
                   document.getElementById("update").disabled = true;
                   document.getElementById("save").disabled = true;
@@ -308,6 +212,9 @@ function edit(event)
             document.getElementById("select-1").value = data.type_id;
             // document.getElementById("select-2").value = data.code_id;
             document.getElementById("rate").value = data.rate;
+            document.getElementById("slider").value = data.slider;
+            document.getElementById("lift").value = data.lift;
+            
             document.getElementById("update").disabled = false;
             document.getElementById("save").disabled = true;
             document.getElementById("add").disabled = true;

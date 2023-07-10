@@ -13,7 +13,7 @@ let hardware = 0
 let shelve = 0
 let check_list = []
 let check_list2 = []
-let custom_val = 0
+let custom_val = 0.0
 
 
 function toggle(event){
@@ -116,6 +116,7 @@ function change_code_rate(event){
               if(i.id === document.getElementById('code').value)
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - code_rate;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try {
                   code_rate = parseFloat(i.rate)
@@ -130,6 +131,7 @@ function change_code_rate(event){
                   code_rate = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + code_rate;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
@@ -151,6 +153,7 @@ function change_finishing_rate(event){
               if(i.id === document.getElementById('door-panel').value)
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
                   door = parseFloat(i.rate)
@@ -162,6 +165,7 @@ function change_finishing_rate(event){
                   door = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
@@ -184,6 +188,7 @@ function change_handles_rate(event){
               if(i.id === document.getElementById('handler').value)
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
                   handler = parseFloat(i.rate)
@@ -193,6 +198,7 @@ function change_handles_rate(event){
                   handler = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + handler;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
@@ -215,6 +221,7 @@ function change_hardware_rate(event){
               if(i.id === document.getElementById('hardware').value)
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
                   hardware = parseFloat(i.rate)
@@ -228,6 +235,7 @@ function change_hardware_rate(event){
                   hardware = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
@@ -249,6 +257,7 @@ function change_shelve_rate(event){
               if(i.id === document.getElementById("shelves").value)
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
                   shelve = parseFloat(i.rate)
@@ -261,6 +270,7 @@ function change_shelve_rate(event){
                   shelve = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
               }
             })
@@ -608,6 +618,7 @@ function clear_dropdowns() {
   handler = 0;
   hardware = 0;
   shelve = 0;
+  custom_val = 0;
 }
 
 document.getElementById('clear').addEventListener('click', (event) => {
@@ -703,6 +714,7 @@ function all_clear(){
         handler = 0
         hardware = 0
         shelve = 0
+        custom_val = 0
         check_list = []
         check_list2 = []
       })
@@ -975,6 +987,7 @@ function code_change(event){
                   code_rate = i.rate
                 }
                 document.getElementById('unit').value = code_rate;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * code_rate;
               }
             })
@@ -1225,9 +1238,11 @@ document.getElementById('additional').addEventListener('keyup', (event) => {
   if( key == 8 || key == 46 ) {
     if(parseFloat(document.getElementById('additional').value)){
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2);
       document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
   
       document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
       custom_val = parseFloat(document.getElementById('additional').value)
       document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
     }
@@ -1235,8 +1250,8 @@ document.getElementById('additional').addEventListener('keyup', (event) => {
       if(custom_val!==0)
       {
         document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+        document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
         document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
-    
         custom_val = 0
         document.getElementById('additional').value = 0;
       }
@@ -1246,11 +1261,14 @@ document.getElementById('additional').addEventListener('keyup', (event) => {
   else{
     if(parseFloat(document.getElementById('additional').value)){
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
       document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
   
       document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
+      document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
       custom_val = parseFloat(document.getElementById('additional').value)
       document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+      
     }
   }
 })
@@ -1279,6 +1297,7 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
                   shelve = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
@@ -1287,6 +1306,7 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
   }
   else if(val === "no" && shelve !== 0){
     document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+    document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
     document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
     document.getElementById('shelves').value = ""
     shelve = 0
@@ -1302,6 +1322,7 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
   const val = event.target.value;
   document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
   document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
   if(val === '')
   {
@@ -1327,6 +1348,7 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
                   door = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
@@ -1340,6 +1362,7 @@ document.getElementById('handler').addEventListener('change', (event) => {
   const val = event.target.value;
   document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
   document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
@@ -1363,6 +1386,7 @@ document.getElementById('handler').addEventListener('change', (event) => {
                   handler = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + handler;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
@@ -1376,6 +1400,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
   const val = event.target.value;
   document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
   document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
@@ -1403,6 +1428,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
                   hardware = i.rate;
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
               }
             })
@@ -1415,6 +1441,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
 document.getElementById('shelves').addEventListener('change', (event) => {
   const val = event.target.value;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
+  document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
   document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
   if(val === '')
   {
@@ -1441,6 +1468,7 @@ document.getElementById('shelves').addEventListener('change', (event) => {
                   shelve = i.rate
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
+                document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
                 document.getElementById('is_shelve').value = 'yes';
               }
