@@ -1,5 +1,6 @@
 const remote = require('electron').remote
 const fs = require("fs");
+const { event } = require('jquery');
 const path = require('path')
 const file_manager = remote.require(path.join(__dirname, '../scripts/file_manager.js'))
 
@@ -119,13 +120,38 @@ function change_code_rate(event){
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try {
-                  code_rate = parseFloat(i.rate)
-                  code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
-                  const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
-                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
-                  const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
-                  const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
-                  code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  const select = document.getElementById("code-price");
+                  const selectedIndex = select.selectedIndex;
+                  const selectedValue = select.value;
+                  const selectedText = select.options[selectedIndex].text; 
+                  if (selectedText === "Box Sheet Price/PC") {
+                    code_rate = parseFloat(i.rate)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
+                  else if (selectedText === "Box Back Sheet Price/PC") {
+                    code_rate = parseFloat(i.back_area)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.rate) * parseFloat(rates.rate_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
+                  else if (selectedText === "Secondary Top Sheet Price/PC") {
+                    code_rate = parseFloat(i.secondary_top)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.rate) * parseFloat(rates.rate_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
+                  
                 }
                 catch (e){
                   code_rate = i.rate
@@ -224,12 +250,34 @@ function change_hardware_rate(event){
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
                 document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
                 try{
-                  hardware = parseFloat(i.rate)
-                  hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
-                  const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
-                  hardware = hardware + slider;
-                  const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
-                  hardware = hardware + lift;
+                  const select = document.getElementById("hardware-price");
+                  const selectedIndex = select.selectedIndex;
+                  const selectedValue = select.value;
+                  const selectedText = select.options[selectedIndex].text; 
+                  if(selectedText === "Hinges Price/SET"){
+                    hardware = parseFloat(i.rate)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                    hardware = hardware + lift;
+                  }
+                  else if (selectedText === "Slider Price/SET"){
+                    hardware = parseFloat(i.slider)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.rate) * parseFloat(rates.rate_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                    hardware = hardware + lift;
+                  }
+                  else if (selectedText === "Lift Up Price/SET"){
+                    hardware = parseFloat(i.lift)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.rate) * parseFloat(rates.rate_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                    hardware = hardware + lift;
+                  }
                 }
                 catch (e) {
                   hardware = i.rate
@@ -334,15 +382,40 @@ document.getElementById('edit').addEventListener('click', (event) => {
             res.forEach(i => {
               if(i.id === item.code)
               {
-                try {
-                  code_rate = parseFloat(i.rate)
-                  document.getElementById('code-new-rate').value = item.code_rate
-                  code_rate = code_rate * parseFloat(item.code_rate);
-                  const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
-                  const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
-                  const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
-                  const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
-                  code_rate = code_rate + back_area + edging + screws + secondary_top;
+                try { 
+                  if (item.code_rate_type === "Box Sheet Price/PC") {
+                    document.getElementById("code-price").selectedIndex = 0;
+                    document.getElementById('code-new-rate').value = item.code_rate;
+                    code_rate = parseFloat(i.rate)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
+                  else if (item.code_rate_type === "Box Back Sheet Price/PC") {
+                    document.getElementById("code-price").selectedIndex = 1;
+                    document.getElementById('code-new-rate').value = item.code_rate;
+                    code_rate = parseFloat(i.back_area)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.rate) * parseFloat(rates.rate_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.secondary_top) * parseFloat(rates.secondary_top_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
+                  else if (item.code_rate_type === "Secondary Top Sheet Price/PC") {
+                    document.getElementById("code-price").selectedIndex = 2;
+                    document.getElementById('code-new-rate').value = item.code_rate;
+                    code_rate = parseFloat(i.secondary_top)
+                    code_rate = code_rate * parseFloat(document.getElementById('code-new-rate').value)
+                    const back_area = parseFloat(i.back_area) * parseFloat(rates.back_area_codes);
+                    const edging = parseFloat(i.edging) * parseFloat(rates.edging_codes);
+                    const screws = parseFloat(i.screws) * parseFloat(rates.screws_codes);
+                    const secondary_top = parseFloat(i.rate) * parseFloat(rates.rate_codes);
+                    code_rate = code_rate + back_area + edging + screws + secondary_top;
+                  }
                 }
                 catch (e){
                   code_rate = i.rate
@@ -467,13 +540,37 @@ document.getElementById('edit').addEventListener('click', (event) => {
               if(i.id === item.hardware)
               {
                 try{
-                  hardware = parseFloat(i.rate)
-                  document.getElementById('harware-new-rate').value = item.hardware_rate;
-                  hardware = hardware * parseFloat(item.hardware_rate);
-                  const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
-                  hardware = hardware + slider;
-                  const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
-                  hardware = hardware + lift;
+                  
+                  if(item.hardware_rate_type === "Hinges Price/SET"){
+                    document.getElementById("hardware-price").selectedIndex = 0;
+                    document.getElementById('harware-new-rate').value = item.hardware_rate
+                    hardware = parseFloat(i.rate)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                    hardware = hardware + lift;
+                  }
+                  else if (item.hardware_rate_type === "Slider Price/SET"){
+                    document.getElementById("hardware-price").selectedIndex = 1;
+                    document.getElementById('harware-new-rate').value = item.hardware_rate
+                    hardware = parseFloat(i.slider)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.rate) * parseFloat(rates.rate_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.lift) * parseFloat(rates.lift_hardware);
+                    hardware = hardware + lift;
+                  }
+                  else if (item.hardware_rate_type === "Lift Up Price/SET"){
+                    document.getElementById("hardware-price").selectedIndex = 2;
+                    document.getElementById('harware-new-rate').value = item.hardware_rate
+                    hardware = parseFloat(i.lift)
+                    hardware = hardware * parseFloat(document.getElementById('harware-new-rate').value);
+                    const slider = parseFloat(i.rate) * parseFloat(rates.rate_hardware);
+                    hardware = hardware + slider;
+                    const lift = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
+                    hardware = hardware + lift;
+                  }
                 }
                 catch (e) {
                   hardware = i.rate
@@ -610,6 +707,8 @@ function clear_dropdowns() {
   document.getElementById('code-new-rate').value = 0;
   document.getElementById('finishing-new-rate').value = 0;
   document.getElementById('harware-new-rate').value = 0;
+  document.getElementById("hardware-price").selectedIndex = 0;
+  document.getElementById("code-price").selectedIndex = 0;
   document.getElementById('handle-new-rate').value = 0;
   document.getElementById('shelve-new-rate').value = 0;
   item = null;
@@ -785,6 +884,29 @@ function load_pricing_dropdown() {
     opt.style.color = 'black'
     qty.options.add(opt)
   }
+  
+  file_manager
+      .loadFile(path.join(__dirname, `../db/.rates.json`))
+      .then((res) => {
+        const hardwarePrice = document.getElementById('hardware-price')
+        hardwarePrice.innerHTML = "";
+        [["Hinges Price/SET", "rate_hardware"], ["Slider Price/SET", "slider_hardware"], ["Lift Up Price/SET", "lift_hardware"]].forEach(i => {
+          const opt = document.createElement('option')
+          opt.value = res[i[1]]
+          opt.text = i[0]
+          opt.style.color = 'black'
+          hardwarePrice.options.add(opt)
+        })
+        const codePrice = document.getElementById('code-price')
+        codePrice.innerHTML = "";
+        [["Box Sheet Price/PC", "rate_codes"], ["Box Back Sheet Price/PC", "back_area_codes"], ["Secondary Top Sheet Price/PC", "secondary_top_codes"]].forEach(i => {
+          const opt = document.createElement('option')
+          opt.value = res[i[1]]
+          opt.text = i[0]
+          opt.style.color = 'black'
+          codePrice.options.add(opt)
+        })
+      })
 }
 
 function delete_dropdown( drp, inp){
@@ -863,6 +985,8 @@ function utility_change(event){
   document.getElementById('code-new-rate').value = 0;
   document.getElementById('finishing-new-rate').value = 0;
   document.getElementById('harware-new-rate').value = 0;
+  document.getElementById("hardware-price").selectedIndex = 0;
+  document.getElementById("code-price").selectedIndex = 0;
   document.getElementById('handle-new-rate').value = 0;
   document.getElementById('shelve-new-rate').value = 0;
   code_rate = 0
@@ -907,6 +1031,8 @@ function type_change(event){
   document.getElementById('code-new-rate').value = 0;
   document.getElementById('finishing-new-rate').value = 0;
   document.getElementById('harware-new-rate').value = 0;
+  document.getElementById("hardware-price").selectedIndex = 0;
+  document.getElementById("code-price").selectedIndex = 0;
   document.getElementById('handle-new-rate').value = 0;
   document.getElementById('shelve-new-rate').value = 0;
   code_rate = 0
@@ -961,6 +1087,7 @@ function code_change(event){
     document.getElementById('code-new-rate').value = 0;
     document.getElementById('finishing-new-rate').value = 0;
     document.getElementById('harware-new-rate').value = 0;
+    document.getElementById("hardware-price").selectedIndex = 0;
     document.getElementById('handle-new-rate').value = 0;
     document.getElementById('shelve-new-rate').value = 0;
   }
@@ -974,6 +1101,7 @@ function code_change(event){
               if(i.id === code)
               {
                 try {
+                  document.getElementById("code-price").selectedIndex = 0;
                   code_rate = parseFloat(i.rate)
                   document.getElementById('code-new-rate').value = rates.rate_codes
                   code_rate = code_rate * parseFloat(rates.rate_codes);
@@ -1083,6 +1211,14 @@ function code_change(event){
   }
 }
 
+document.getElementById("hardware-price").addEventListener("change", (event) => {
+  document.getElementById("harware-new-rate").value = event.target.value;
+})
+
+document.getElementById("code-price").addEventListener("change", (event) => {
+  document.getElementById("code-new-rate").value = event.target.value;
+})
+
 function discount_and_tax(){
   if(document.getElementById('gross-amount').value.toString() === '0')
   {
@@ -1162,6 +1298,14 @@ function populate_table() {
 document.getElementById('form-pricing').addEventListener('submit', (event) => {
   event.preventDefault();
   document.getElementById('open').disabled = true;
+  const select = document.getElementById("hardware-price");
+  const selectedIndex = select.selectedIndex;
+  const selectedValue = select.value;
+  const selectedText = select.options[selectedIndex].text; 
+  const select1 = document.getElementById("code-price");
+  const selectedIndex1 = select.selectedIndex;
+  const selectedValue1 = select.value;
+  const selectedText1 = select.options[selectedIndex].text; 
   item = {
     "item_id": items.length + 1,
     "elevation": document.getElementById('elevation-input').value,
@@ -1188,6 +1332,8 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "finishing_rate": document.getElementById('finishing-new-rate').value,
     "handle_rate": document.getElementById('handle-new-rate').value,
     "hardware_rate": document.getElementById('harware-new-rate').value,
+    "hardware_rate_type": selectedText,
+    "code_rate_type": selectedText1,
     "shelve_rate": document.getElementById('shelve-new-rate').value,
   }
   if(document.getElementById('is_shelve').value === 'no')
@@ -1417,6 +1563,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
               {
                 try{
                   hardware = parseFloat(i.rate);
+                  document.getElementById("hardware-price").selectedIndex = 0;
                   document.getElementById('harware-new-rate').value = rates.rate_hardware;
                   hardware = hardware * parseFloat(rates.rate_hardware);
                   const slider = parseFloat(i.slider) * parseFloat(rates.slider_hardware);
@@ -1530,7 +1677,8 @@ document.getElementById('confirm').addEventListener('click', (event) => {
                           "discount": document.getElementById('discount').value,
                           "tax": document.getElementById('tax').value,
                           "calculated_tax": document.getElementById('calculated-tax').value,
-                          "net": document.getElementById('net').value
+                          "net": document.getElementById('net').value,
+                          "category": document.getElementById('category-input').value,
                         }
                         old_pricing[ind] = pricing
                       }
@@ -1576,7 +1724,8 @@ document.getElementById('confirm').addEventListener('click', (event) => {
                     "discount": document.getElementById('discount').value,
                     "tax": document.getElementById('tax').value,
                     "calculated_tax": document.getElementById('calculated-tax').value,
-                    "net": document.getElementById('net').value
+                    "net": document.getElementById('net').value,
+                    "category": document.getElementById('category-input').value,
                   }
                   // if(indd === -1)
                   // {
@@ -1745,6 +1894,7 @@ document.getElementById('confirm-1').addEventListener('click', (event) => {
             document.getElementById('tax').value = i["pinfo"].tax;
             document.getElementById('calculated-tax').value = i["pinfo"].calculated_tax;
             document.getElementById('net').value = i["pinfo"].net;
+            document.getElementById('category-input').value = i["pinfo"].category;
             document.getElementById('open').disabled = true
             document.getElementById('confirm-1').disabled = true;
             document.getElementById('print').disabled = false;

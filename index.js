@@ -20,7 +20,7 @@ exports.openWindow = (file) => {
   });
   win.maximize();
   win.show();
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   win.loadURL(`file://${__dirname}/src/${file}`);
 };
 
