@@ -118,7 +118,7 @@ function change_code_rate(event){
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - code_rate;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 try {
                   const select = document.getElementById("code-price");
                   const selectedIndex = select.selectedIndex;
@@ -158,7 +158,7 @@ function change_code_rate(event){
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + code_rate;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -180,7 +180,7 @@ function change_finishing_rate(event){
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 try{
                   door = parseFloat(i.rate)
                   door = door * parseFloat(document.getElementById('finishing-new-rate').value);
@@ -192,7 +192,7 @@ function change_finishing_rate(event){
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -215,7 +215,7 @@ function change_handles_rate(event){
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - handler;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 try{
                   handler = parseFloat(i.rate)
                   handler = handler * parseFloat(document.getElementById('handle-new-rate').value);
@@ -225,7 +225,7 @@ function change_handles_rate(event){
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + handler;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -248,7 +248,7 @@ function change_hardware_rate(event){
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 try{
                   const select = document.getElementById("hardware-price");
                   const selectedIndex = select.selectedIndex;
@@ -284,7 +284,7 @@ function change_hardware_rate(event){
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -306,7 +306,7 @@ function change_shelve_rate(event){
               {
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 try{
                   shelve = parseFloat(i.rate)
                   shelve = shelve * parseFloat(document.getElementById('shelve-new-rate').value);
@@ -319,7 +319,7 @@ function change_shelve_rate(event){
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -1116,7 +1116,7 @@ function code_change(event){
                 }
                 document.getElementById('unit').value = code_rate;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * code_rate;
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * code_rate, 0);
               }
             })
           })
@@ -1327,7 +1327,7 @@ document.getElementById('form-pricing').addEventListener('submit', (event) => {
     "is_shelve": document.getElementById('is_shelve').value,
     "additional": document.getElementById('additional').value,
     "unit": parseFloat(document.getElementById('unit').value),
-    "total": parseFloat(document.getElementById('total').innerHTML),
+    "total": Math.round(parseFloat(document.getElementById('total').innerHTML), 0),
     "code_rate": document.getElementById('code-new-rate').value,
     "finishing_rate": document.getElementById('finishing-new-rate').value,
     "handle_rate": document.getElementById('handle-new-rate').value,
@@ -1385,19 +1385,19 @@ document.getElementById('additional').addEventListener('keyup', (event) => {
     if(parseFloat(document.getElementById('additional').value)){
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2);
-      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+      document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value), 0);
   
       document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
       custom_val = parseFloat(document.getElementById('additional').value)
-      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+      document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value), 0);
     }
     else{
       if(custom_val!==0)
       {
         document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
         document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-        document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+        document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value), 0);
         custom_val = 0
         document.getElementById('additional').value = 0;
       }
@@ -1408,12 +1408,12 @@ document.getElementById('additional').addEventListener('keyup', (event) => {
     if(parseFloat(document.getElementById('additional').value)){
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - custom_val;
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+      document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value), 0);
   
       document.getElementById('unit').value = parseFloat(document.getElementById('additional').value) + parseFloat(document.getElementById('unit').value);
       document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
       custom_val = parseFloat(document.getElementById('additional').value)
-      document.getElementById('total').innerHTML = parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value);
+      document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('unit').value) * parseFloat(document.getElementById('qty').value), 0);
       
     }
   }
@@ -1444,7 +1444,7 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -1453,7 +1453,7 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
   else if(val === "no" && shelve !== 0){
     document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
     document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-    document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+    document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
     document.getElementById('shelves').value = ""
     shelve = 0
   }
@@ -1461,7 +1461,7 @@ document.getElementById('is_shelve').addEventListener('change', (event) => {
 
 document.getElementById('qty').addEventListener('change', (event) => {
   if(document.getElementById('unit').value !== '0' && document.getElementById('unit').value !== '')
-  document.getElementById('total').innerHTML = parseFloat(event.target.value) * parseFloat(document.getElementById('unit').value);
+  document.getElementById('total').innerHTML = Math.round(parseFloat(event.target.value) * parseFloat(document.getElementById('unit').value), 0);
 })
 
 document.getElementById('door-panel').addEventListener('change', (event) => {
@@ -1469,7 +1469,7 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
   document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - door;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-  document.getElementById('total').innerHTML = parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value);
+  document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
   if(val === '')
   {
     door = 0
@@ -1495,7 +1495,7 @@ document.getElementById('door-panel').addEventListener('change', (event) => {
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + door;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -1547,7 +1547,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
   document.getElementById('additional').value = 0;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - hardware;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-  document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+  document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
   if(val === '')
   {
     hardware = 0
@@ -1576,7 +1576,7 @@ document.getElementById('hardware').addEventListener('change', (event) => {
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + hardware;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
               }
             })
           })
@@ -1589,7 +1589,7 @@ document.getElementById('shelves').addEventListener('change', (event) => {
   const val = event.target.value;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) - shelve;
   document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-  document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+  document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
   if(val === '')
   {
     shelve = 0
@@ -1616,7 +1616,7 @@ document.getElementById('shelves').addEventListener('change', (event) => {
                 }
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value) + shelve;
                 document.getElementById('unit').value = parseFloat(document.getElementById('unit').value).toFixed(2)
-                document.getElementById('total').innerHTML = (parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value));
+                document.getElementById('total').innerHTML = Math.round(parseFloat(document.getElementById('qty').value) * parseFloat(document.getElementById('unit').value), 0);
                 document.getElementById('is_shelve').value = 'yes';
               }
             })
@@ -2003,7 +2003,7 @@ document.getElementById('print').addEventListener('click', async function (event
                                 <p style="color: black; font-size: 10px"><b>Total:</b></p>
                             </div>
                             <div style="display: flex; flex-direction: column; width: 100px; text-align: left; margin-left: 10px">
-                                <p style="color: black; font-size: 10px;"><b>${Intl.NumberFormat('en-US').format(document.getElementById('gross-amount').value)}</b></p>
+                                <p style="color: black; font-size: 10px;"><b>${Intl.NumberFormat('en-US').format(document.getElementById('gross-amount').value)}.00</b></p>
                                 
                             </div>
                         `;
