@@ -768,6 +768,8 @@ function all_clear(){
           document.getElementById('pricing-no').value = parseFloat(res[res.length - 1]["pinfo"].pricing_no) + 1;
         }
         document.getElementById("entry-date").valueAsDate = new Date();
+        document.getElementById('entry-date-backup').value = '';
+        document.getElementById('pricing-type').value = ''
         document.getElementById('delivery-days').value = "";
         document.getElementById('manual-input').value = "";
         document.getElementById('category-input').value = "";
@@ -1882,6 +1884,8 @@ document.getElementById('confirm-1').addEventListener('click', (event) => {
             document.getElementById('save').innerHTML = "Update";
             document.getElementById('pricing-no').value = i["pinfo"].pricing_no;
             document.getElementById("entry-date").value = i["pinfo"].entry_date.split('T')[0];
+            document.getElementById('entry-date-backup').value = '';
+            document.getElementById('pricing-type').value = ''
             document.getElementById('delivery-days').value = i["pinfo"].delivery_days;
             document.getElementById('manual-input').value = i["pinfo"].manual_no;
             document.getElementById('client-input').value = i["pinfo"].client;
@@ -1936,10 +1940,46 @@ document.getElementById('is_quotation').addEventListener('change', (event) => {
   {
     document.getElementById('tax').disabled = true;
     document.getElementById('discount').disabled = true;
+    if (document.getElementById('pricing-type').value == '') {
+      document.getElementById('pricing-type').value = 'invoice';
+    }
+
+    if (document.getElementById('pricing-type').value == 'quotation') {
+      const backupDate = document.getElementById('entry-date-backup').value;
+      if (backupDate != '') {
+        document.getElementById("entry-date").value = backupDate;
+      }
+    }
+
   }
   else {
     document.getElementById('tax').disabled = false;
     document.getElementById('discount').disabled = false;
+
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+
+    if (document.getElementById('pricing-type').value == '') {
+      document.getElementById('pricing-type').value = 'quotation';
+      document.getElementById("entry-date-backup").value = document.getElementById("entry-date").value;
+    }
+
+    if (document.getElementById('pricing-type').value == 'invoice') {
+      const backupDate = document.getElementById('entry-date-backup').value;
+      if (backupDate != '') {
+        document.getElementById("entry-date").value = backupDate;
+      }
+    } else {
+      document.getElementById("entry-date").value = today;
+    }
+    
   }
 })
 
